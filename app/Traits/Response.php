@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Pagination\LengthAwarePaginator;
 
-trait ApiResponse{
+trait Response{
 
     protected function successResponse($data, $message = null, $code = 200)
 	{

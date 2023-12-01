@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\Children;
 use App\Http\Requests\StoreChildrenRequest;
 use App\Http\Requests\UpdateChildrenRequest;
@@ -11,7 +12,8 @@ use App\Traits\Response;
 
 class ChildrenController extends Controller
 {
-    
+    use Response;
+
     public function index()
     {
         $childs = Children::where('parent_id',Auth::user()->id)->with('my_parent')->get();
@@ -19,7 +21,7 @@ class ChildrenController extends Controller
     }
 
     public function child_interface($id){
-        
+
         $child = Children::find($id);
         return view('Children.dashboard',compact('child'));
     }
@@ -27,13 +29,13 @@ class ChildrenController extends Controller
 
     public function create()
     {
-        return view('Children.newacc');
+        return view('Parent.newacc');
     }
 
     public function store(StoreChildrenRequest $request)
     {
         $val_request = $request->validated();
-        $existing_child = Children::where('name',$val_request)->first();
+        $existing_child = Children::where('name',$val_request)->where('parent_id',auth()->user()->id)->first();
         if($existing_child)
             {//check if it's already added before.
             return $this->errorResponse('child already exists',401);
@@ -48,26 +50,17 @@ class ChildrenController extends Controller
                 return redirect()->back();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Children  $children
-     * @return \Illuminate\Http\Response
-     */
+    
     public function show(Children $children)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Children  $children
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Children $children)
+  
+    public function edit($child)
     {
-        //
+        $editchild = Children::find($child)->first();
+        return view('Parent.edit_child_acc',compact('editchild'));
     }
 
     /**
@@ -77,19 +70,19 @@ class ChildrenController extends Controller
      * @param  \App\Models\Children  $children
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateChildrenRequest $request, Children $children)
+    public function update(StoreChildrenRequest $request, $child)
     {
-        //
+        $val_request = $request->validated();
+        
+        $updatechild = Children::find($child)->where('parent_id',auth()->user()->id)->first();
+        $updatechild->update($val_request);
+        return redirect(route('getchilds'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Children  $children
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Children $children)
+
+    public function destroy($id)
     {
-        //
+        $remove_child = Children::find($id)->delete();
+        return redirect()->back();
     }
 }

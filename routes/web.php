@@ -32,6 +32,11 @@ Route::get('childs',[ChildrenController::class,'create'])->name('addchild');
 Route::post('childs',[ChildrenController::class,'store'])->name('storechild');
 //go to child's dashboard
 Route::get('child/{id}',[ChildrenController::class,'child_interface'])->name('child_interface');
+//delete child's account
+Route::get('childrem/{id}',[ChildrenController::class,'destroy'])->name('child_remove');
+//edit child's account
+Route::get('childedi/{id}',[ChildrenController::class,'edit'])->name('editchild');
+Route::post('childedi/{id}',[ChildrenController::class,'update'])->name('updatechild');
 
 });
 
