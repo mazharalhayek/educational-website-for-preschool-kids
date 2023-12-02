@@ -85,4 +85,9 @@ class ChildrenController extends Controller
         $remove_child = Children::find($id)->delete();
         return redirect()->back();
     }
+
+    public function chat(){
+        return view('chat');
+    }
+
 }

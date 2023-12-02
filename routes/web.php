@@ -37,6 +37,8 @@ Route::get('childrem/{id}',[ChildrenController::class,'destroy'])->name('child_r
 //edit child's account
 Route::get('childedi/{id}',[ChildrenController::class,'edit'])->name('editchild');
 Route::post('childedi/{id}',[ChildrenController::class,'update'])->name('updatechild');
+//chating
+Route::get('childch',[ChildrenController::class,'chat'])->name('chat');
 
 });
 

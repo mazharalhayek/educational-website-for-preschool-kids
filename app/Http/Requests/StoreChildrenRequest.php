@@ -21,6 +21,7 @@ class StoreChildrenRequest extends FormRequest
         return [
             'name'=>['required','string','min:5','max:20'],
             'age'=>['required','integer','min:2','max:8'],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ];
     }
 
