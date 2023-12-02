@@ -44,8 +44,8 @@
 						<div class="card text-center">
 							<img class="card-img-top w-100" src="fsdf" alt="">
 							<div class="card-body">
-								<h4 class="card-title mb-3">{{$child->name}}</h4>
-                                <h4 class="card-title mb-3">{{$child->age}}</h4>
+								<h4 class="card-title mb-3">Name: {{$child->name}}</h4>
+                                <h4 class="card-title mb-3">Age: {{$child->age}}</h4>
 								<p class="card-text"></p>
                                 <table style="margin-right:40px">
                                     <th><a class="btn btn-warning" href="{{route('editchild',$child->id)}}" title="Edit Account">✏️</a></th>
