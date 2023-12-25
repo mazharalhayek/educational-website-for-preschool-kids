@@ -2,6 +2,8 @@
 @section('css')
 <link href="{{URL::asset('assets/plugins/morris.js/morris.css')}}" rel="stylesheet">
 <link href="{{URL::asset('assets/plugins/jqvmap/jqvmap.min.css')}}" rel="stylesheet">
+<link href="{{URL::asset('assets/plugins/owl-carousel/owl.carousel.css')}}" rel="stylesheet">
+<link href="{{URL::asset('assets/plugins/sweet-alert/sweetalert.css')}}" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 <style>
     .card {
@@ -64,7 +66,7 @@
                     <div class="col-xl-4 col-lg-4 col-md-12">
                         <div class="card text-center" >
                             <div class="card-body">
-                                <img class="card-img-top" src="{{asset('images/'.$child->image)}}" alt="child pic">
+                                <img class="card-img-top" src="{{asset('images/'.$child->image)}}" alt="">
                                 <br>
                                 <hr class="line">
                                 <h4 class="card-title mb-3">Name: {{$child->name}}</h4>
@@ -72,7 +74,7 @@
                                 <table style="margin-right:15px">
                                     <th><a class="btn btn-dark" href="{{route('Parent.editchild',$child->id)}}" title="Edit Account"><i class="fas fa-pencil-alt"></i></a></th>
                                     <th><a class="btn btn-primary" href="{{route('Parent.child_interface',$child->id)}}">Log in </a></th>
-                                    <th><a class="btn btn-dark" href="{{route('Parent.child_remove',$child->id)}}" title="Remove Account"><i class="fas fa-trash-alt"></i></a></th>
+                                    <th><a class="btn btn-dark ripple"  title="Remove Account"  id='swal-warning'><i class="fas fa-trash-alt"></i></a></th>
                                 </table>
                             </div>
                         </div>
@@ -87,9 +89,19 @@
 			<!-- Container closed -->
 		</div>
 		<!-- main-content closed -->
+
 @endsection
 @section('js')
-
+<script src="{{URL::asset('assets/plugins/jquery-ui/ui/widgets/datepicker.js')}}"></script>
+<!-- Internal Select2 js-->
+<script src="{{URL::asset('assets/plugins/select2/js/select2.min.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/rating/ratings.js')}}"></script>
+<!--Internal  Sweet-Alert js-->
+<script src="{{URL::asset('assets/plugins/sweet-alert/sweetalert.min.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/sweet-alert/jquery.sweet-alert.js')}}"></script>
+<!-- Sweet-alert js  -->
+<script src="{{URL::asset('assets/plugins/sweet-alert/sweetalert.min.js')}}"></script>
+<script src="{{URL::asset('assets/js/sweet-alert.js')}}"></script>
 <script>
     function refreshPage() {
       // Reload the current page

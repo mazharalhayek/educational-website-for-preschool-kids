@@ -20,8 +20,8 @@ class ChildrenController extends Controller
         return view('Children_Cards',compact('childs'));
     }
 
-    public function child_interface($id){
-
+    public function child_interface($id)
+    {
         $child = Children::find($id);
         return view('Children.dashboard',compact('child'));
     }
@@ -36,23 +36,35 @@ class ChildrenController extends Controller
     {
         $val_request = $request->validated();
         $existing_child = Children::where('name',$val_request)->where('parent_id',auth()->user()->id)->first();
+
         if($existing_child)
-            {//check if it's already added before.
+        {                           //check if it's already added before.
             return $this->errorResponse('child already exists',401);
-            }
-            $image_link = $request->image;
-            $image = $image_link->file('filename');
-dd($image);
+        }
+
+        if($request->image != null)
+        {                           //check if the user uploaded an image while
+                                    //creating a child profile because it's causing some troubles
             $newchild = Children::create([
                 'name'        => $val_request['name'],
-                'parent_id' => Auth::user()->id,
-                'age'       => $val_request['age'],
-                'password' => $val_request['password'],
-                'image' =>$val_request['image'],
+                'parent_id'   => Auth::user()->id,
+                'age'         => $val_request['age'],
+                'password'    => $val_request['password'],
+                'image'       => $val_request['image'],
             ]);
-                return redirect()->back();
-    }
 
+            return redirect()->back();
+        }
+
+        $newchild = Children::create([
+            'name'        => $val_request['name'],
+            'parent_id'   => Auth::user()->id,
+            'age'         => $val_request['age'],
+            'password'    => $val_request['password'],
+        ]);
+
+        return redirect()->back();
+    }
 
     public function show(Children $children)
     {
@@ -90,7 +102,7 @@ dd($image);
     }
 
     public function chat(){
-        return view('blog');
+        return view('sweet-alert');
     }
 
 }
