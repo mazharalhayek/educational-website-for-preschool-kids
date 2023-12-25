@@ -23,15 +23,15 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-//Children Routes
-Route::middleware('auth')->group(function(){
+
+//Parent Routes , everything related to the parent...
+Route::middleware('auth')->name('Parent.')->group(function(){
+Route::get('child/{id}',[ChildrenController::class,'child_interface'])->name('child_interface');
 //show all childs
 Route::get('child',[ChildrenController::class,'index'])->name('getchilds');
 //add new child
 Route::get('childs',[ChildrenController::class,'create'])->name('addchild');
 Route::post('childs',[ChildrenController::class,'store'])->name('storechild');
-//go to child's dashboard
-Route::get('child/{id}',[ChildrenController::class,'child_interface'])->name('child_interface');
 //delete child's account
 Route::get('childrem/{id}',[ChildrenController::class,'destroy'])->name('child_remove');
 //edit child's account
@@ -39,8 +39,17 @@ Route::get('childedi/{id}',[ChildrenController::class,'edit'])->name('editchild'
 Route::post('childedi/{id}',[ChildrenController::class,'update'])->name('updatechild');
 //chating
 Route::get('childch',[ChildrenController::class,'chat'])->name('chat');
-
 });
 
+// //Child Routes ,everything related to the child...
+// Route::middlware('auth')->group(function(){
+// //go to child's dashboard
+
+// });
+
+// //Tutor Routes , everything related to the tutor
+// Route::middlware('auth')->group(function(){
+
+// });
 
 require __DIR__.'/auth.php';

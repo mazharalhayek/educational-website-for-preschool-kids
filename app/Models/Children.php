@@ -13,6 +13,7 @@ class Children extends Model
         'age',
         'parent_id',
         'password',
+        'image',
     ];
 
 

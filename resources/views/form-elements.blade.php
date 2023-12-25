@@ -52,7 +52,7 @@
 						<div class="card  box-shadow-0">
 							<div class="card-header">
 								<h4 class="card-title mb-1">Default Form</h4>
-								<p class="mb-2">It is Very Easy to Customize and it uses in your website apllication.</p>
+								<p class="mb-2">this section.</p>
 							</div>
 							<div class="card-body pt-0">
 								<form class="form-horizontal" >

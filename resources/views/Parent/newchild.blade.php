@@ -57,31 +57,31 @@ form {
 @section('content')
 				<!-- row opened -->
 
-<form method="POST" action="{{route('Parent.updatechild',$editchild->id)}}" >
+<form method="POST" action="{{route('Parent.storechild')}}" >
                         @csrf
                         <div class="col-lg-6 col-xl-6 col-md-12 col-sm-12">
                             <div class="card  box-shadow-0">
                                 <div class="card-header">
-                                    <h4 class="card-title mb-1">Edit Child account</h4>
-                                    <p class="mb-2">Edit your child info here</p>
+                                    <h4 class="card-title mb-1">create Child account</h4>
+                                    <p class="mb-2">enter your child info here</p>
                                 </div>
                                 <div class="card-body pt-0">
                                     <form class="form-horizontal" >
                                         <div class="form-group">
-                                            <input type="text" class="form-control" id="inputName" placeholder="Name" name="name" value="{{$editchild->name}}" required>
+                                            <input type="text" class="form-control" id="inputName" placeholder="Name" name="name" required>
                                         </div>
                                         <div class="form-group">
-                                            <input type="number"  min="0" max="8" class="form-control" id="inputEmail3" placeholder="Age" name="age" value="{{$editchild->age}}" required>
+                                            <input type="number"  min="0" max="8" class="form-control" id="inputEmail3" placeholder="Age" name="age" required>
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control" id="inputPassword3" placeholder="Password" name="password" value="{{$editchild->password}}" required>
+                                            <input type="password" class="form-control" id="inputPassword3" placeholder="Password" name="password" required>
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control" id="inputPassword3" placeholder="Confirm Password" name="password_confirmation" value="{{$editchild->password}}" required>
+                                            <input type="password" class="form-control" id="inputPassword3" placeholder="Confirm Password" name="password_confirmation" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="image">Select a pic of your child (optional)</label>
-                                            <input type="file" class="form-control" id="childpic" placeholder="select a pic" value="{{$editchild->image}}" name="image">
+                                            <input type="file" class="form-control" id="childpic" placeholder="select a pic" name="image">
                                         </div>
                                         <div class="form-group mb-0 mt-3 justify-content-end">
                                             <div>
@@ -92,7 +92,9 @@ form {
                                 </div>
                             </div>
                         </div>
-     
+      <div class="flex-1 bg-indigo-100 text-center hidden lg:flex">
+        <div><img src="{{asset('images/Collage—Girl3.png')}}" width="400px" alt="" style="margin-right: 600px;margin-top:-410px"> </div>
+      </div>
     </div>
     <div class="REMOVE-THIS-ELEMENT-IF-YOU-ARE-USING-THIS-PAGE hidden treact-popup fixed inset-0 flex items-center justify-center" style="background-color: rgba(0,0,0,0.3);">
         <div class="max-w-lg p-8 sm:pb-4 bg-white rounded shadow-lg text-center sm:text-left">

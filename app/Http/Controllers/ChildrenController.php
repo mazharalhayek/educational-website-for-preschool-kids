@@ -29,7 +29,7 @@ class ChildrenController extends Controller
 
     public function create()
     {
-        return view('Parent.newacc');
+        return view('Parent.newchild');
     }
 
     public function store(StoreChildrenRequest $request)
@@ -40,23 +40,26 @@ class ChildrenController extends Controller
             {//check if it's already added before.
             return $this->errorResponse('child already exists',401);
             }
-
+            $image_link = $request->image;
+            $image = $image_link->file('filename');
+dd($image);
             $newchild = Children::create([
                 'name'        => $val_request['name'],
                 'parent_id' => Auth::user()->id,
                 'age'       => $val_request['age'],
                 'password' => $val_request['password'],
+                'image' =>$val_request['image'],
             ]);
                 return redirect()->back();
     }
 
-    
+
     public function show(Children $children)
     {
         //
     }
 
-  
+
     public function edit($child)
     {
         $editchild = Children::find($child)->first();
@@ -73,10 +76,10 @@ class ChildrenController extends Controller
     public function update(StoreChildrenRequest $request, $child)
     {
         $val_request = $request->validated();
-        
+
         $updatechild = Children::find($child)->where('parent_id',auth()->user()->id)->first();
         $updatechild->update($val_request);
-        return redirect(route('getchilds'));
+        return redirect(route('Parent.getchilds'));
     }
 
 
@@ -87,7 +90,7 @@ class ChildrenController extends Controller
     }
 
     public function chat(){
-        return view('chat');
+        return view('blog');
     }
 
 }

@@ -1,4 +1,4 @@
-<x-guest-layout>
+<x-guest-layout style="background-image: url(images/moon-bg.png)">
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 

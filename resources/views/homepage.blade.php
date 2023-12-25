@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="keywords" content="​Make kids happy">
     <meta name="description" content="">
-    <title>Gallery 1</title>
+    <title>ChildLearn</title>
     <link rel="stylesheet" href="{{asset('css/nicepage.css')}}" media="screen">
     <link rel="stylesheet" href="{{asset('css/Gallery-1.css')}}" media="screen">
     <script class="u-script" type="text/javascript" src="{{asset('js/jquery-1.9.1.min.js')}}" defer=""></script>
@@ -28,29 +28,26 @@
     <link rel="canonical" href="/">
   <meta data-intl-tel-input-cdn-path="intlTelInput/"></head>
   <body data-path-to-root="./" data-include-products="false" class="u-body u-xl-mode" data-lang="en">
-    <section class="u-clearfix u-palette-4-base u-section-1" id="sec-02bb">
+    <section class="u-clearfix u-palette-4-base u-section-1" id="sec-02bb" style="background-image:url({{asset('images/Untitled-8.jpg')}});background-size:cover;background-repeat:no-repeat">
       <div class="u-clearfix u-sheet u-sheet-1">
-        <h2 class="u-align-center u-custom-font u-text u-text-default u-text-1" style="margin-top:-0px"><img src="images/logo6.png" alt=""></h2>
-        <nav style="background-color: #1a2748; height: auto; border-radius: 10px; display: flex; justify-content: flex-end; align-items: center; padding: 10px;">
-            <a href="{{route('register')}}" style="color: #fff; text-decoration: none;float:left"><button style="background-color: #fff; color: #1a2748; border: none; padding: 5px 10px; border-radius: 5px; ">SignUp</button></a>
-            <a href="{{route('login')}}" style="color: #fff; text-decoration: none;"><button style="background-color: #fff; color: #1a2748; border: none; padding: 5px 10px; border-radius: 5px;">Log In</button></a>
+        <h2 class="u-align-center u-custom-font u-text u-text-default u-text-1" style="margin-top:-0px"></h2>
+        <nav style="background-color: #fa820a; height: auto; border-radius: 10px; border: black solid 2px;display: flex; justify-content: flex-end;margin-top:10px">
+            <h1 style="font-family: Finger Paint;font-size:50px;margin-right:7cm">ChildLearn</h1>
+            <table>
+                <th><a href="{{route('register')}}"  style="color: #fff; text-decoration: none;float:left"><button  style="background-color:#e6b12a; color: #1a2748; border: none; padding: 5px 10px; border-radius: 5px; ">SignUp</button></a></th>
+                <th><a href="{{route('login')}}" style="color: #fff; text-decoration: none;"><button style="background-color: #e6b12a; color: #1a2748; border: none; padding: 5px 10px; border-radius: 5px;">Log In</button></a></th>
+            </table>
         </nav>
         </p>
         <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
           <div class="u-layout">
-            <div class="u-layout-row">
-              <div class="u-container-align-center u-container-style u-layout-cell u-size-30 u-layout-cell-1">
-                <div class="u-container-layout u-valign-middle u-container-layout-1">
-                  <img class="u-image u-image-contain u-image-default u-image-1" src="images/Untitled-2.png" alt="" data-image-width="509" data-image-height="820">
-                </div>
-              </div>
-              <div class="u-container-align-center-sm u-container-align-center-xs u-container-align-left-lg u-container-align-left-md u-container-align-left-xl u-container-style u-layout-cell u-size-30 u-layout-cell-2">
-                <div class="u-container-layout u-valign-middle u-container-layout-2">
-                  <p class="u-align-center-sm u-align-center-xs u-align-left-lg u-align-left-md u-align-left-xl u-text u-text-default u-text-3"> Sample text. Click to Egestas egestas fringilla phasellus faucibus scelerisque eleifend donec pretium vulputate. Pharetra magna ac placerat vestibulum. Quam lacus suspendisse faucibus interdum posuere lorem. Egestas tellus rutrum tellus pellentesque eu tincidunt. Neque vitae tempus quam pellentesque nec.</p>
-                  <h5 class="u-align-center-sm u-align-center-xs u-align-left-lg u-align-left-md u-align-left-xl u-text u-text-default u-text-4"> Call and get a discount</h5>
-                  <p class="u-align-center-sm u-align-center-xs u-align-left-lg u-align-left-md u-align-left-xl u-text u-text-5"> Aenean pulvinar dui ornare, feugiat lorem non, ultrices justo. Mauris efficitur, mauris in auctor euismod, quam elit ultrices urna, eget eleifend arcu risus id metus. Maecenas ex enim, mattis eu velit vitae, blandit mattis sapien. Sed aliquam leo et semper vestibulum.</p>
-                  <a href="https://nicepage.com/k/radio-website-templates" class="u-active-none u-align-center-sm u-align-center-xs u-align-left-lg u-align-left-md u-align-left-xl u-btn u-button-style u-custom-font u-hover-none u-none u-text-hover-palette-3-base u-btn-2"><span class="u-icon u-text-palette-3-base"><svg class="u-svg-content" viewBox="0 0 405.333 405.333" x="0px" y="0px" style="width: 1em; height: 1em;"><path d="M373.333,266.88c-25.003,0-49.493-3.904-72.704-11.563c-11.328-3.904-24.192-0.896-31.637,6.699l-46.016,34.752    c-52.8-28.181-86.592-61.952-114.389-114.368l33.813-44.928c8.512-8.512,11.563-20.971,7.915-32.64    C142.592,81.472,138.667,56.96,138.667,32c0-17.643-14.357-32-32-32H32C14.357,0,0,14.357,0,32    c0,205.845,167.488,373.333,373.333,373.333c17.643,0,32-14.357,32-32V298.88C405.333,281.237,390.976,266.88,373.333,266.88z"></path></svg></span>&nbsp;+1 (234) 567-8910
-                  </a>
+            <div class="u-layout-row" >
+              <div class="u-container-align-center-sm u-container-align-center-xs u-container-align-left-lg u-container-align-left-md u-container-align-left-xl u-container-style u-layout-cell u-size-30 u-layout-cell-2" style="color: rgb(36, 133, 33);margin-left:8cm;margin-top:-3.5cm">
+                <div class="u-container-layout u-valign-middle u-container-layout-2"><b>
+                  <p class="u-align-center-sm u-align-center-xs u-align-left-lg u-align-left-md u-align-left-xl u-text u-text-default u-text-3"> Welcome to ChildLearn where your kids can learn and have fun at the same time!!</p>
+                  <h5 class="u-align-center-sm u-align-center-xs u-align-left-lg u-align-left-md u-align-left-xl u-text u-text-default u-text-4">JOIN US!!</h5>
+                  <p class="u-align-center-sm u-align-center-xs u-align-left-lg u-align-left-md u-align-left-xl u-text u-text-5">Join our community , whether you are a tutor who wants to be in our tutors team & teach the new generation or parent who wants to put their children on the right path to be successful</p>
+                </b>
                 </div>
               </div>
             </div>
@@ -58,19 +55,10 @@
         </div>
       </div>
     </section>
-    <section class="u-clearfix u-image u-section-2" id="sec-18de" data-image-width="2000" data-image-height="1392" style="background-image: url('images/front-view-kid-wearing-party-hat_23-2149477945.jpeg')">
-      <div class="u-clearfix u-sheet u-valign-middle-sm u-sheet-1">
-        <h6 class="u-align-center u-custom-font u-text u-text-default u-text-1">About Us</h6>
-        <h2 class="u-align-center u-custom-font u-text u-text-default u-text-2"> Make kids happy</h2>
-        <img class="u-image u-image-circle u-image-1" src="images/children-colored-caps-playing_23-2147807858.jpeg" alt="" data-image-width="1480" data-image-height="986">
-        <img class="u-image u-image-circle u-image-2" src="images/crop-woman-putting-napkin-girl_23-2147783721.jpeg" alt="" data-image-width="1480" data-image-height="986">
-        <div class="u-image u-image-circle u-image-3" alt="" data-image-width="1480" data-image-height="986"></div>
-        <div class="u-image u-image-circle u-image-4" alt="" data-image-width="1480" data-image-height="986"></div>
-      </div>
-    </section>
+
     <section class="u-clearfix u-container-align-center u-palette-4-dark-3 u-section-3" id="sec-9cbe">
       <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
-        <p class="u-align-center u-text u-text-1"> Aenean pulvinar dui ornare, feugiat lorem non, ultrices justo. Mauris efficitur, mauris in auctor euismod, quam elit ultrices urna, eget eleifend arcu risus id metus. Maecenas ex enim, mattis eu velit vitae, blandit mattis sapien. Sed aliquam leo et semper vestibulum.</p>
+        <p class="u-align-center u-text u-text-1">In case you want to be uptodate , follow us on social media platforms like FaceBook , Twitter & Instagram</p>
         <div class="u-social-icons u-spacing-10 u-social-icons-1">
           <a class="u-social-url" title="facebook" target="_blank" href="https://facebook.com/name"><span class="u-icon u-social-facebook u-social-icon u-text-palette-3-base u-icon-1"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 112 112" style=""><use xlink:href="#svg-0805"></use></svg><svg class="u-svg-content" viewBox="0 0 112 112" x="0" y="0" id="svg-0805"><path fill="currentColor" d="M75.5,28.8H65.4c-1.5,0-4,0.9-4,4.3v9.4h13.9l-1.5,15.8H61.4v45.1H42.8V58.3h-8.8V42.4h8.8V32.2
 c0-7.4,3.4-18.8,18.8-18.8h13.8v15.4H75.5z"></path></svg></span>
@@ -89,29 +77,34 @@ c0-7.4,3.4-18.8,18.8-18.8h13.8v15.4H75.5z"></path></svg></span>
         </div>
       </div>
     </section>
-    <section class="u-clearfix u-image u-section-4" id="carousel_6037" data-image-width="2000" data-image-height="1392" style="background-image:url('images/Untitled-3.jpg')">
-      <div class="u-clearfix u-sheet u-valign-middle-lg u-valign-middle-sm u-valign-middle-xs u-sheet-1">
-        <h2 class="u-align-center u-custom-font u-text u-text-default u-text-1">Happy Learning</h2>
-        <p class="u-align-center u-text u-text-default u-text-2">Image from <a href="nicepage.com" class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-3-base u-btn-1">Nicepage</a>
-        </p>
-        <div class="u-image u-image-circle u-image-1" alt="" data-image-width="5760" data-image-height="3840"></div>
-        <div class="u-image u-image-circle u-image-2" alt="" data-image-width="5760" data-image-height="3840"></div>
-        <div class="u-image u-image-circle u-image-3" alt="" data-image-width="5432" data-image-height="3622"></div>
-        <div class="u-image u-image-circle u-image-4" alt="" data-image-width="5760" data-image-height="3840"></div>
-      </div>
-    </section>
     <section class="u-clearfix u-container-align-center u-palette-2-base u-section-5" id="sec-5e66">
       <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
-        <h2 class="u-align-center u-text u-text-default u-text-1"> Book a free consultation</h2>
-        <p class="u-align-center u-text u-text-default u-text-2">Sample text. Click to select the Text Element.</p>
-        <a href="https://nicepage.com" class="u-align-center u-border-none u-btn u-btn-round u-button-style u-radius-50 u-white u-btn-1">call me</a>
+        <h2 class="u-align-center u-text u-text-default u-text-1">Book a free consualtion</h2>
+        <p class="u-align-center u-text u-text-default u-text-2">Chat with our tutors team to get to know them</p>
+        <table id="teachers">
+            <tr>
+                <th><img src="{{asset('images/teacher1.png')}}" alt="" class="teachers_pics"></th>
+                <th><img src="{{asset('images/teacher2.png')}}" alt="" class="teachers_pics"></th>
+                <th><img src="{{asset('images/teacher3.png')}}" alt="" class="teachers_pics"></th>
+            </tr>
+            <tr>
+               <td><b>Sarah John</b></td>
+               <td><b>Sabrina Smith</b></td>
+               <td><b>Gearge Floyd</b></td>
+            </tr>
+            <tr>
+                <td><h4>Science Teacher</h4></td>
+                <td><h4>Math Teacher</h4></td>
+                <td><h4>Art Teacher</h4></td>
+            </tr>
+        </table>
+
       </div>
     </section>
-    <section class="u-align-center u-clearfix u-image u-section-6" id="sec-805d" data-image-width="1869" data-image-height="1080" style="background-image:url('images/Untitled-8.jpg')">
+    <section class="u-align-center u-clearfix u-image u-section-6" id="sec-805d"  style="background-image:url('images/clouds-bg.png');background-size:cover;background-repeat:no-repeat;">
       <div class="u-clearfix u-sheet u-valign-middle-xs u-sheet-1">
         <h4 class="u-align-center u-custom-font u-text u-text-default u-text-1"> Sign up for the newsletter</h4>
-        <p class="u-align-center u-text u-text-2"> Want to be the first to read our news? Subscribe to the newsletter to keep abreast of all events. Image from <a href="https://freepik.com" class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-3-base u-btn-1">Freepik</a>
-        </p>
+        <p class="u-align-center u-text u-text-2"> Want to be the first to read our news? Subscribe to the newsletter to keep abreast of all events. </p>
         <div class="u-form u-form-1">
           <form action="https://forms.nicepagesrv.com/v2/form/process" class="u-clearfix u-form-horizontal u-form-spacing-26 u-inner-form" source="email" name="form" style="padding: 0px;">
             <div class="u-form-email u-form-group u-label-none">
@@ -133,7 +126,7 @@ c0-7.4,3.4-18.8,18.8-18.8h13.8v15.4H75.5z"></path></svg></span>
 
 
 
-    <footer class="u-align-center u-clearfix u-footer u-grey-80 u-footer" id="sec-176d"><div class="u-clearfix u-sheet u-sheet-1">
+    <footer class="u-align-center u-clearfix u-footer u-grey-80 u-footer" id="sec-176d" style="height:1cm"><div class="u-clearfix u-sheet u-sheet-1">
         <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2">
             <table >
                 <th>

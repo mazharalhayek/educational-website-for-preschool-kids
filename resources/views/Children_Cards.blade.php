@@ -2,7 +2,25 @@
 @section('css')
 <link href="{{URL::asset('assets/plugins/morris.js/morris.css')}}" rel="stylesheet">
 <link href="{{URL::asset('assets/plugins/jqvmap/jqvmap.min.css')}}" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+    .card {
+       width: 7cm; /* adjust as needed */
+       height:8cm; /* adjust as needed */
+    }
+
+    .card-img-top {
+       width: 3cm;
+       height:3cm;
+    }
+    .line{
+        border: none;
+        height: 2px; /* Adjust this value to change the thickness */
+        background-color: #333;
+    }
+    </style>
 @endsection
+
 @section('page-header')
 				<!-- breadcrumb -->
 				<div class="breadcrumb-header justify-content-between">
@@ -39,23 +57,30 @@
 @endsection
 @section('content')
 				<!-- row opened -->
-                @foreach ($childs as $child)
-					<div class="col-xl-4 col-lg-4 col-md-12">
-						<div class="card text-center">
-							<img class="card-img-top w-100" src="fsdf" alt="">
-							<div class="card-body">
-								<h4 class="card-title mb-3">Name: {{$child->name}}</h4>
+
+                @foreach ($childs->chunk(3) as $chunk)
+                <div class="row">
+                    @foreach ($chunk as $child)
+                    <div class="col-xl-4 col-lg-4 col-md-12">
+                        <div class="card text-center" >
+                            <div class="card-body">
+                                <img class="card-img-top" src="{{asset('images/'.$child->image)}}" alt="child pic">
+                                <br>
+                                <hr class="line">
+                                <h4 class="card-title mb-3">Name: {{$child->name}}</h4>
                                 <h4 class="card-title mb-3">Age: {{$child->age}}</h4>
-								<p class="card-text"></p>
-                                <table style="margin-right:40px">
-                                    <th><a class="btn btn-warning" href="{{route('editchild',$child->id)}}" title="Edit Account">✏️</a></th>
-                                    <th><a class="btn btn-primary" href="{{route('child_interface',$child->id)}}">Log in </a></th>
-                                    <th><a class="btn btn-danger" href="{{route('child_remove',$child->id)}}" title="Remove Account">🗑️</a></th>
-                                </table>          
-							</div>
-						 </div>
-					</div>
+                                <table style="margin-right:15px">
+                                    <th><a class="btn btn-dark" href="{{route('Parent.editchild',$child->id)}}" title="Edit Account"><i class="fas fa-pencil-alt"></i></a></th>
+                                    <th><a class="btn btn-primary" href="{{route('Parent.child_interface',$child->id)}}">Log in </a></th>
+                                    <th><a class="btn btn-dark" href="{{route('Parent.child_remove',$child->id)}}" title="Remove Account"><i class="fas fa-trash-alt"></i></a></th>
+                                </table>
+                            </div>
+                        </div>
+                     </div>
                     @endforeach
+                </div>
+             @endforeach
+
 				</div>
 				<!-- row closed -->
 			</div>

@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-   
+
     public function up()
     {
         Schema::create('childrens', function (Blueprint $table) {
@@ -15,12 +15,13 @@ return new class extends Migration
             $table->foreignId("parent_id")->constrained('parents');
             $table->Integer("age");
             $table->string("password");
+            $table->binary('image')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
     }
 
-   
+
     public function down()
     {
         Schema::dropIfExists('childrens');
