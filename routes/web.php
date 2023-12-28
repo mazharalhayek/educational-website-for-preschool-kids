@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ChildrenController;
+use App\Http\Controllers\BookController;
+
 
 Route::get('/', function () {
     return view('homepage');
@@ -39,6 +41,15 @@ Route::get('childedi/{id}',[ChildrenController::class,'edit'])->name('editchild'
 Route::post('childedi/{id}',[ChildrenController::class,'update'])->name('updatechild');
 //chating
 Route::get('childch',[ChildrenController::class,'chat'])->name('chat');
+//show parent's books
+Route::get('getbooks',[BookController::class,'show_parent_books'])->name('parentbook');
+});
+
+//Admin Routes , everything related to the Admin
+Route::middleware('auth')->name('Admin.')->group(function(){
+//table of users acounts.
+Route::get('usersacc/{type}',[AdminController::class,'users_accounts'])->name('usersaccounts');
+
 });
 
 // //Child Routes ,everything related to the child...

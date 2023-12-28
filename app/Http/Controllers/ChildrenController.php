@@ -102,7 +102,7 @@ class ChildrenController extends Controller
     }
 
     public function chat(){
-        return view('sweet-alert');
+        return view('icons');
     }
 
 }

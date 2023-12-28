@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Parents;
+use App\Models\Tutor;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -45,15 +46,23 @@ class RegisteredUserController extends Controller
         switch($type)
         {
             case 'parent':
-                $parent = Parents::create([
+                $user = Parents::create([
                     'name' => $request->name,
                     'email' => $request->email,
                     'password' => Hash::make($request->password),
-                    'phone_num' =>$request->type,
                     'birth_date'=>$request->birth_date,
-                ]);
+                ]);                 
                 break;
-
+            case 'tutor':
+                $user = Tutor::create([
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'password' => Hash::make($request->password),
+                    'birth_date'=>$request->birth_date,
+                ]);                   
+                break;
+            default: 
+                return view('404');
         }
 
         $user = User::create([
