@@ -13,7 +13,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class Tutor extends Model
 {
-    
+    use HasFactory;
 
     protected $fillable =
     [
@@ -21,7 +21,12 @@ class Tutor extends Model
         'email',
         'password',
         'birth_date',
+        'salary',
+        'qualifications',
+        'subject'
     ];
 
-    use HasFactory;
+
+    
+
 }

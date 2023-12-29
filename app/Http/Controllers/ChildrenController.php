@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 
 use App\Models\Children;
+use App\Models\TutorChild;
+use App\Models\Tutor;
 use App\Http\Requests\StoreChildrenRequest;
 use App\Http\Requests\UpdateChildrenRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 use App\Traits\Response;
 
 
@@ -101,8 +104,39 @@ class ChildrenController extends Controller
         return redirect()->back();
     }
 
-    public function chat(){
-        return view('icons');
+    public function chat()
+    {
+        return view('tutor_info');
+    }
+
+    public function tutor_info($id)
+    {
+        $specific_tutor = Tutor::where('id',$id)->first();
+        $which_child = Children::where('parent_id',Auth::id())->get();
+        return view('tutor_info',compact('specific_tutor'),compact('which_child'));
+    }
+
+    public function hire_a_tutor(Request $request,$id)
+    {
+        $hire = TutorChild::create([
+            'child_id' => $request['child_id'],
+            'tutor_id' => $id,
+        ]);
+        return redirect()->back();
+    }
+
+    public function already_hired()
+    {
+        // $thisuserchild = Children::where('parent_id',Auth::id())->with('teached_by')->get();
+        // dd($thisuserchild);
+        $childtutor = TutorChild::with('teached_by','teaches')->get();
+        return view('hired_tutors',compact('childtutor'));
+    }
+
+    public function display_tutors()
+    {
+        $tutors = Tutor::query()->get();
+        return view('tutors_cards',compact('tutors'));
     }
 
 }

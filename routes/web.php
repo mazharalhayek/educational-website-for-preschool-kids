@@ -43,6 +43,14 @@ Route::post('childedi/{id}',[ChildrenController::class,'update'])->name('updatec
 Route::get('childch',[ChildrenController::class,'chat'])->name('chat');
 //show parent's books
 Route::get('getbooks',[BookController::class,'show_parent_books'])->name('parentbook');
+//display all available tutors
+Route::get('alltutors',[ChildrenController::class,'display_tutors'])->name('display_tutors');
+//display a specific tutor info
+Route::get('tutorinfo/{id}',[ChildrenController::class,'tutor_info'])->name('tutor_info');
+//hire a new tutor
+Route::post('hirenew/{id}',[ChildrenController::class,'hire_a_tutor'])->name('hire_a_tutor');
+//display all hired tutors
+Route::get('hiredtutors',[ChildrenController::class,'already_hired'])->name('hired_tutors');
 });
 
 //Admin Routes , everything related to the Admin

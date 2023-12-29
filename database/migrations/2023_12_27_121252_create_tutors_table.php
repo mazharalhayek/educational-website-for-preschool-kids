@@ -20,6 +20,10 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->datetime('birth_date');
+            $table->float('salary');
+            $table->string('qualifications')->nullable(false);
+            $table->string('subject');
+            
             $table->timestamps();
         });
     }

@@ -51,7 +51,7 @@ class RegisteredUserController extends Controller
                     'email' => $request->email,
                     'password' => Hash::make($request->password),
                     'birth_date'=>$request->birth_date,
-                ]);                 
+                ]);
                 break;
             case 'tutor':
                 $user = Tutor::create([
@@ -59,9 +59,12 @@ class RegisteredUserController extends Controller
                     'email' => $request->email,
                     'password' => Hash::make($request->password),
                     'birth_date'=>$request->birth_date,
-                ]);                   
+                    'salary' =>$request->salary,
+                    'qualifications'=>$request->qualifications,
+                    'subject'=>$request->subject,
+                ]);
                 break;
-            default: 
+            default:
                 return view('404');
         }
 
