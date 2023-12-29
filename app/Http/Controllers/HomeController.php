@@ -22,20 +22,20 @@ class HomeController extends Controller
         if(Auth::id())
         {
 
-            $type = Auth()->user()->type;//get the type of user who's trying to log in.
+            $type = Auth()->user()->type;//get the type of the user who's trying to log in.
 
             switch($type){
-                case 'parent'://if the type is 'parent' then go to the dashboard page...
+                case 'parent':
                     return view('index');
                     break;
-                case 'tutor'://if the type is 'tutor' then go to the dashboard page...
+                case 'tutor':
+                    return view('index');
                     break;
-                case 'admin'://if the type is 'admin' then go to the administration page...
-                    break;
-                case 'owner':
+                case 'admin':
+                    return view('index');
                     break;
                 default:
-                    return redirect()->back();
+                    return view('404');
             }
         }
 

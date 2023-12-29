@@ -3,14 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Parents;
+use App\Models\Children;
 
 class AdminController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index($id)
     {
         if(view()->exists($id)){
@@ -21,14 +19,28 @@ class AdminController extends Controller
             return view('404');
         }
 
-     //   return view($id);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function users_accounts($type){
+
+        switch($type){
+            case 'parent':
+                $accounts = Parents::query()->get();
+                return view('parentslist',compact('accounts'));
+                break;
+
+            case 'children':
+                $accounts = Children::query()->with('my_parent')->get();
+                return view('childrenlist',compact('accounts'));
+                break;
+
+            default:
+                return view('404');
+        }
+
+    }
+
+
     public function create()
     {
         //

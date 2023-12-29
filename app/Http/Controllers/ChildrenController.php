@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 
 use App\Models\Children;
+use App\Models\TutorChild;
+use App\Models\Tutor;
 use App\Http\Requests\StoreChildrenRequest;
 use App\Http\Requests\UpdateChildrenRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 use App\Traits\Response;
 
 
@@ -20,8 +23,8 @@ class ChildrenController extends Controller
         return view('Children_Cards',compact('childs'));
     }
 
-    public function child_interface($id){
-
+    public function child_interface($id)
+    {
         $child = Children::find($id);
         return view('Children.dashboard',compact('child'));
     }
@@ -29,34 +32,49 @@ class ChildrenController extends Controller
 
     public function create()
     {
-        return view('Parent.newacc');
+        return view('Parent.newchild');
     }
 
     public function store(StoreChildrenRequest $request)
     {
         $val_request = $request->validated();
         $existing_child = Children::where('name',$val_request)->where('parent_id',auth()->user()->id)->first();
-        if($existing_child)
-            {//check if it's already added before.
-            return $this->errorResponse('child already exists',401);
-            }
 
+        if($existing_child)
+        {                           //check if it's already added before.
+            return $this->errorResponse('child already exists',401);
+        }
+
+        if($request->image != null)
+        {                           //check if the user uploaded an image while
+                                    //creating a child profile because it's causing some troubles
             $newchild = Children::create([
                 'name'        => $val_request['name'],
-                'parent_id' => Auth::user()->id,
-                'age'       => $val_request['age'],
-                'password' => $val_request['password'],
+                'parent_id'   => Auth::user()->id,
+                'age'         => $val_request['age'],
+                'password'    => $val_request['password'],
+                'image'       => $val_request['image'],
             ]);
-                return redirect()->back();
+
+            return redirect()->back();
+        }
+
+        $newchild = Children::create([
+            'name'        => $val_request['name'],
+            'parent_id'   => Auth::user()->id,
+            'age'         => $val_request['age'],
+            'password'    => $val_request['password'],
+        ]);
+
+        return redirect()->back();
     }
 
-    
     public function show(Children $children)
     {
         //
     }
 
-  
+
     public function edit($child)
     {
         $editchild = Children::find($child)->first();
@@ -73,10 +91,10 @@ class ChildrenController extends Controller
     public function update(StoreChildrenRequest $request, $child)
     {
         $val_request = $request->validated();
-        
+
         $updatechild = Children::find($child)->where('parent_id',auth()->user()->id)->first();
         $updatechild->update($val_request);
-        return redirect(route('getchilds'));
+        return redirect(route('Parent.getchilds'));
     }
 
 
@@ -86,6 +104,42 @@ class ChildrenController extends Controller
         return redirect()->back();
     }
 
+    public function chat()
+    {
+        return view('tutor_info');
+    }
+
+    public function tutor_info($id)
+    {
+        $specific_tutor = Tutor::where('id',$id)->first();
+        $which_child = Children::where('parent_id',Auth::id())->get();
+        return view('tutor_info',compact('specific_tutor'),compact('which_child'));
+    }
+
+    public function hire_a_tutor(Request $request,$id)
+    {
+        $hire = TutorChild::create([
+            'child_id' => $request['child_id'],
+            'tutor_id' => $id,
+        ]);
+        return redirect()->back();
+    }
+
+    public function already_hired()
+    {
+        // $thisuserchild = Children::where('parent_id',Auth::id())->with('teached_by')->get();
+        // dd($thisuserchild);
+        $childtutor = TutorChild::with('teached_by','teaches')->get();
+        return view('hired_tutors',compact('childtutor'));
+    }
+
+    public function display_tutors()
+    {
+        $tutors = Tutor::query()->get();
+        return view('tutors_cards',compact('tutors'));
+    }
+
+}
     public function chat(){
         return view('chat');
     }

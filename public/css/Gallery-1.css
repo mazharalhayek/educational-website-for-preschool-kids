@@ -1,6 +1,4 @@
- .u-section-1 {
-  background-image: none;
-}
+
 
 .u-section-1 .u-sheet-1 {
   min-height: 784px;
@@ -761,4 +759,13 @@
   .u-section-6 .u-form-1 {
     width: 340px;
   }
+}
+.teachers_pics{
+    border-radius:1000px;
+    width: 200px;
+    height: 200px;
+}
+#teachers{
+    font-family: Finger Paint;
+    text-align: center;
 }

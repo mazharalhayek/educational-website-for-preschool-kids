@@ -10,22 +10,23 @@ use Illuminate\Database\Eloquent\Model;
 use Laravel\Sanctum\HasApiTokens;
 
 
-class Parents extends Model 
-{
 
-    protected $fillable = 
+class Tutor extends Model
+{
+    use HasFactory;
+
+    protected $fillable =
     [
         'name',
         'email',
         'password',
         'birth_date',
+        'salary',
+        'qualifications',
+        'subject'
     ];
 
 
-    public function mychidlren()
-    {
-        return $this->hasMany(Children::class);
-    }
+    
 
-    use HasFactory;
 }
