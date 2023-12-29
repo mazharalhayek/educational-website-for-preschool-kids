@@ -140,3 +140,8 @@ class ChildrenController extends Controller
     }
 
 }
+    public function chat(){
+        return view('chat');
+    }
+
+}

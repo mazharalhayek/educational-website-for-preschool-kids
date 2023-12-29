@@ -59,6 +59,22 @@
                             </div>
                         </div>
                      </div>
+                @foreach ($childs as $child)
+					<div class="col-xl-4 col-lg-4 col-md-12">
+						<div class="card text-center">
+							<img class="card-img-top w-100" src="fsdf" alt="">
+							<div class="card-body">
+								<h4 class="card-title mb-3">Name: {{$child->name}}</h4>
+                                <h4 class="card-title mb-3">Age: {{$child->age}}</h4>
+								<p class="card-text"></p>
+                                <table style="margin-right:40px">
+                                    <th><a class="btn btn-warning" href="{{route('editchild',$child->id)}}" title="Edit Account">✏️</a></th>
+                                    <th><a class="btn btn-primary" href="{{route('child_interface',$child->id)}}">Log in </a></th>
+                                    <th><a class="btn btn-danger" href="{{route('child_remove',$child->id)}}" title="Remove Account">🗑️</a></th>
+                                </table>          
+							</div>
+						 </div>
+					</div>
                     @endforeach
                 </div>
              @endforeach
