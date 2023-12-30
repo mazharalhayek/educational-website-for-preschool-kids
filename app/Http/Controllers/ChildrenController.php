@@ -3,14 +3,15 @@
 namespace App\Http\Controllers;
 
 
-use App\Models\Children;
-use App\Models\TutorChild;
+use App\Models\Book;
 use App\Models\Tutor;
+use App\Models\Children;
+use App\Traits\Response;
+use App\Models\TutorChild;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreChildrenRequest;
 use App\Http\Requests\UpdateChildrenRequest;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
-use App\Traits\Response;
 
 
 class ChildrenController extends Controller
@@ -163,7 +164,8 @@ class ChildrenController extends Controller
         return view('Parent.progress_reports', compact('childs'));
     }
     public function buyBooks(){
-        return view ('Parent.buy_books'); 
+        $books = Book::all(); 
+        return view ('Parent.buy_books', compact('books')); 
     }
 
     public function viewWallet(){

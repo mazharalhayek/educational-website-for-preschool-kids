@@ -1,12 +1,13 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\StudentDashboardController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ChildrenController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ChildrenController;
+use App\Http\Controllers\ServicesController;
+use App\Http\Controllers\StudentDashboardController;
 
 
 Route::get('/', function () {
@@ -56,17 +57,30 @@ Route::get('hiredtutors',[ChildrenController::class,'already_hired'])->name('hir
 Route::get('child-report', [ChildrenController::class,'viewReports'])->name('viewReports');
 //Buy Books
 Route::get('buy-books',[ChildrenController::class,'buyBooks'])->name('buyBooks');
+//view Purchased books
+Route::get('purchased-books', [BookController::class,'show_parent_books'])->name('purchasedBooks');
 //View Wallet
 Route::get('view-wallet', [ChildrenController::class,'viewWallet'])->name('viewWallet');
 //Issue Feedback
 Route::get('issue-feedback',[ChildrenController::class, 'issueFeedback'])->name('issueFeedback');
-
+//Post Issue Feedback
+Route::post('send-feedback/{type}', [ServicesController::class,'store'])->name('sendFeedback');
+// Buy Book 
+Route::post('/books/{id}/confirm-purchase', [BookController::class, 'confirmPurchase'])->name('confirmPurchase');
 });
 
 //Admin Routes , everything related to the Admin
 Route::middleware('auth')->name('Admin.')->group(function(){
 //table of users acounts.
 Route::get('usersacc/{type}',[AdminController::class,'users_accounts'])->name('usersaccounts');
+//display user feedback
+Route::get('display-feedback',[AdminController::class,'displayFeedback'])->name('displayFeedback'); 
+//delete user feedback
+Route::delete('delete-feedback/{id}', [ServicesController::class,'destroy'])->name('destroyFeedback'); 
+//add Book page 
+Route::get('add-Book', [AdminController::class,'addBook'])->name('addBook');
+// add book post
+Route::post('add-book-post', [BookController::class,'store'])->name('postBook');
 });
 
 

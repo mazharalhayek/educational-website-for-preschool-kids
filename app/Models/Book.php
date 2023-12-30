@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Parents;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Book extends Model
 {
@@ -14,6 +16,13 @@ class Book extends Model
         'title',
         'author',
         'description',
-        'category',
+        'price',
+        'Cover',
+        'PDF'
     ];
+
+    public function parents()
+{
+    return $this->belongsToMany(Parent::class, 'parent_books');
+}
 }

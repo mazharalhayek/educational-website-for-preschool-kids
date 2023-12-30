@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Parents;
 use App\Models\Children;
+use App\Models\Services;
 
 class AdminController extends Controller
 {
@@ -38,6 +39,16 @@ class AdminController extends Controller
                 return view('404');
         }
 
+    }
+
+    public function displayFeedback(){
+
+        $feedback = Services::where('type', 'feedback')->with('service')->get();
+        return view('Admin.display-feedback', compact('feedback'));
+    }
+
+    public function addBook(){
+        return view('Admin.add-book');
     }
 
 

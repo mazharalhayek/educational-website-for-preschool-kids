@@ -45,16 +45,17 @@
 @section('content')
     <!-- center container -->
     <div class = "container-fluid">
+        
         <div class="row row-cols-1 row-cols-md-4 g-4">
+            @foreach($books as $item)
             <div class="col">
-                <div class="card h-100">
-                    <img src="images\books\what-the-ladybird-heard-at-the-seaside.jpg" class="card-img-top" alt="..."
+                <div class="card h-100" style="min-height: 450px">
+                    <img src="{{ asset('storage/' . $item->Cover) }}" class="card-img-top" alt="..."
                         style="height: 65%">
                     <div class="card-body">
-                        <h5 class="card-title">What the Ladybird Heard at the Seaside</h5>
-                        <h6 class="card-text">Julia Donaldson
-                            & Lydia Monks</h6>
-                        <p class = "card-text" style="min-height: 40%"> Join everyone's favourite crime-busting ladybird on a trip to the seaside!
+                        <h5 class="card-title">{{$item->title}}</h5>
+                        <h6 class="card-text">{{$item->author}}</h6>
+                        <p class = "card-text" style="min-height: 40%"> {{$item->description}}
                         </p>
                         <!-- Button trigger modal -->
                         <div style="display:flex; gap: 1rem;">
@@ -62,7 +63,7 @@
                             data-bs-target="#exampleModal">
                             Purchase
                         </button>
-                        <p style="font-size: 1rem; font-weight: 500;"> 9.99$ </p>
+                        <p style="font-size: 1rem; font-weight: 500;"> ${{$item->price}} </p>
                             </div>
 
                         <!-- Modal -->
@@ -77,9 +78,11 @@
                                         ?Are you sure you want to buy this book
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary">Confirm Purchase</button>
+                                        <form method="POST" action="{{ route('Parent.confirmPurchase', $item->id) }}">
+                                            @csrf
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary">Confirm Purchase</button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -88,174 +91,11 @@
 
                 </div>
             </div>
-            <div class="col">
-                <div class="card h-100">
-                    <img src="images\books\what-the-ladybird-heard-at-the-seaside.jpg" class="card-img-top" alt="..."
-                        style="height: 65%">
-                    <div class="card-body">
-                        <h5 class="card-title">What the Ladybird Heard at the Seaside</h5>
-                        <h6 class="card-text">Julia Donaldson
-                            & Lydia Monks</h6>
-                        <p class = "card-text" style="min-height: 40%"> Join everyone's favourite crime-busting ladybird on a trip to the seaside!
-                        </p>
-                        <div style="display:flex; gap: 1rem;">
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                            data-bs-target="#exampleModal">
-                            Purchase
-                        </button>
-                        
-                        <p style="font-size: 1rem; font-weight: 500;"> 9.99$ </p>
-                            </div>
-                    
-
-                     <!-- Modal -->
-                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                         aria-hidden="true">
-                         <div class="modal-dialog modal-dialog-centered">
-                             <div class="modal-content">
-                                 <div class="modal-header">
-                                     <h5 class="modal-title" id="exampleModalLabel"> Purchase</h5>
-                                 </div>
-                                 <div class="modal-body">
-                                     ?Are you sure you want to buy this book
-                                 </div>
-                                 <div class="modal-footer">
-                                     <button type="button" class="btn btn-secondary"
-                                         data-bs-dismiss="modal">Close</button>
-                                     <button type="button" class="btn btn-primary">Confirm Purchase</button>
-                                 </div>
-                             </div>
-                         </div>
-                     </div>
-                    </div>
-
-                </div>
-            </div>
-            <div class="col">
-                <div class="card h-100">
-                    <img src="images\books\lost-and-found.jpeg" class="card-img-top" alt="..." style="height: 65%">
-                    <div class="card-body">
-                        <h5 class="card-title">Lost and Found</h5>
-                        <h6 class="card-text">Oliver Jeffers</h6>
-                        <p class = "card-text">This is the endearing story of a boy and the journey he undertakes to return
-                            a lost penguin back to its home. This simple story with beautiful illustrations has also been
-                            made into an animated movie. </p>
-                             <!-- Button trigger modal -->
-                        <div style="display:flex; gap: 1rem;">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                        data-bs-target="#exampleModal">
-                        Purchase
-                    </button>
-                    <p style="font-size: 1rem; font-weight: 500;"> 9.99$ </p>
-                        </div>
-
-                    <!-- Modal -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel"> Confirm Purchase</h5>
-                                </div>
-                                <div class="modal-body">
-                                    ?Are you sure you want to buy this book
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
-                                        data-bs-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Confirm Purchase</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-
-                </div>
-            </div>
-            <div class="col">
-                <div class="card h-100">
-                    <img src="images\books\the-rabbit-the-dark-and-the-biscuit-tin.jpeg" class="card-img-top"
-                        alt="..." style="height: 65%">
-                    <div class="card-body">
-                        <h5 class="card-title">The Rabbit, The Dark and the Biscuit Tin</h5>
-                        <h6 class="card-text">Nicola O'Byrne</h6>
-                        <p class = "card-text"> If bedtime is a battle, then this hilarious, inventive picture book from
-                            international bestseller, Nicola O'Byrne, is exactly what you need</p>
-                             <!-- Button trigger modal -->
-                             <div style="display:flex; gap: 1rem;">
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">
-                                Purchase
-                            </button>
-                            <p style="font-size: 1rem; font-weight: 500;"> 9.99$ </p>
-                                </div>
-
-                    <!-- Modal -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Confirm Purchase</h5>
-                                </div>
-                                <div class="modal-body">
-                                    ?Are you sure you want to buy this book
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
-                                        data-bs-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary"> Confirm Purchase</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card h-100">
-                    <img src="images\books\how-do-you-make-a-rainbow.jpeg" class="card-img-top" alt="..."
-                        style="height: 65%">
-                    <div class="card-body">
-                        <h5 class="card-title">?How Do You Make a Rainbow</h5>
-                        <h6 class="card-text">Caroline Crowe
-                            & Cally Johnson-Isaacs
-                        </h6>
-                        <p class = "card-text"> A joyful picturebook tapping into the power of finding positivity in the
-                            world around us.</p>
-                             <!-- Button trigger modal -->
-                             <div style="display:flex; gap: 1rem;">
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">
-                                Purchase
-                            </button>
-                            <p style="font-size: 1rem; font-weight: 500;"> 9.99$ </p>
-                                </div>
-
-                    <!-- Modal -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Confirm Purchase</h5>
-                                </div>
-                                <div class="modal-body">
-                                    ?Are you sure you want to buy this book
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
-                                        data-bs-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Confirm Purchase</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-            </div>
+            @endforeach
+        
 
         </div>
+      
     </div>
     </div>
 

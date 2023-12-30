@@ -13,15 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('books', function (Blueprint $table) {
+        Schema::create('parent_books', function (Blueprint $table) {
             $table->id();
-            $table->string('title')->nullable(false);
-            $table->string('author')->nullable(false);
-            $table->string('description')->nullable(false); 
-            $table->integer('price')->nullable(false); 
-            $table->binary('Cover')->nullable(false); 
-            $table->binary('PDF')->nullable(false);
+            $table->unsignedBigInteger('parent_id');
+            $table->unsignedBigInteger('book_id');
             $table->timestamps();
+
+            // Define foreign key constraints
+            $table->foreign('parent_id')->references('id')->on('parents')->onDelete('cascade');
+            $table->foreign('book_id')->references('id')->on('books')->onDelete('cascade');
         });
     }
 
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('books');
+        Schema::dropIfExists('parent_books');
     }
 };
