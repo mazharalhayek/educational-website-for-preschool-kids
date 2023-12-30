@@ -42,47 +42,29 @@
                 @foreach ($childs->chunk(3) as $chunk)
                 <div class="row">
                     @foreach ($chunk as $child)
-                    <div class="col-xl-4 col-lg-4 col-md-12">
-                        <div class="card text-center" >
-                            <div class="card-body">
-                                <img class="card-img-top" src="{{asset('images/'.$child->image)}}" onerror="this.onerror=null;this.src='{{asset('images/kids3.png')}}';">
-
-                                <br>
-                                <hr class="line">
-                                <h4 class="card-title mb-3">Name: {{$child->name}}</h4>
-                                <h4 class="card-title mb-3">Age: {{$child->age}}</h4>
-                                <table style="margin-right:15px">
-                                    <th><a class="btn btn-dark" href="{{route('Parent.editchild',$child->id)}}" title="Edit Account" data-placement="bottom" data-toggle="tooltip" ><i class="fas fa-pencil-alt"></i></a></th>
-                                    <th><a class="btn btn-primary" href="{{route('Parent.child_interface',$child->id)}}">Log in </a></th>
-                                    <th><a class="btn btn-dark ripple" href="{{route('Parent.child_remove',$child->id)}}" title="Remove Account"  id="swal-warning" data-placement="bottom" data-toggle="tooltip" ><i class="fas fa-trash-alt"></i></a></th>
-                                </table>
+                        <div class="col-xl-4 col-lg-4 col-md-12">
+                            <div class="card text-center">
+                                <div class="card-body">
+                                    <img class="card-img-top" src="{{ asset('images/'.$child->image) }}" onerror="this.onerror=null;this.src='{{ asset('images/kids3.png') }}';">
+            
+                                    <br>
+                                    <hr class="line">
+                                    <h4 class="card-title mb-3">Name: {{ $child->name }}</h4>
+                                    <h4 class="card-title mb-3">Age: {{ $child->age }}</h4>
+                                    <table class = "mx-auto">
+                                        <th><a class="btn btn-dark" href="{{ route('Parent.editchild', $child->id) }}" title="Edit Account" data-placement="bottom" data-toggle="tooltip"><i class="fas fa-pencil-alt"></i></a></th>
+                                        <th><a class="btn btn-primary" href="{{ route('Parent.child_interface', $child->id) }}">Log in</a></th>
+                                        <th><a class="btn btn-dark ripple" href="{{ route('Parent.child_remove', $child->id) }}" title="Remove Account" id="swal-warning" data-placement="bottom" data-toggle="tooltip"><i class="fas fa-trash-alt"></i></a></th>
+                                    </table>
+                                </div>
                             </div>
                         </div>
-                     </div>
-                @foreach ($childs as $child)
-					<div class="col-xl-4 col-lg-4 col-md-12">
-						<div class="card text-center">
-							<img class="card-img-top w-100" src="fsdf" alt="">
-							<div class="card-body">
-								<h4 class="card-title mb-3">Name: {{$child->name}}</h4>
-                                <h4 class="card-title mb-3">Age: {{$child->age}}</h4>
-								<p class="card-text"></p>
-                                <table style="margin-right:40px">
-                                    <th><a class="btn btn-warning" href="{{route('editchild',$child->id)}}" title="Edit Account">✏️</a></th>
-                                    <th><a class="btn btn-primary" href="{{route('child_interface',$child->id)}}">Log in </a></th>
-                                    <th><a class="btn btn-danger" href="{{route('child_remove',$child->id)}}" title="Remove Account">🗑️</a></th>
-                                </table>          
-							</div>
-						 </div>
-					</div>
                     @endforeach
                 </div>
-             @endforeach
-				</div>
-				<!-- row closed -->
-			</div>
-			<!-- Container closed -->
-		</div>
+            @endforeach
+            </div>
+        </div>
+    </div>            
 		<!-- main-content closed -->
 @endsection
 @section('js')

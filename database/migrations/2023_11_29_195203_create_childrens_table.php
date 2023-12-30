@@ -12,7 +12,8 @@ return new class extends Migration
         Schema::create('childrens', function (Blueprint $table) {
             $table->id();
             $table->string("name");
-            $table->foreignId("parent_id")->constrained('users');
+            $table->unsignedBigInteger('parent_id');
+            $table->foreign('parent_id')->references('id')->on('parents');
             $table->Integer("age");
             $table->string("password");
             $table->binary('image')->nullable();

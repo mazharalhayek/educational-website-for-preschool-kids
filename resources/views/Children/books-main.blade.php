@@ -56,7 +56,7 @@
                 <ul class="nav flex-column mx-auto mt-3 pt-2">
                     <li class="nav-item mt-4">
                         <a class="nav-link active" aria-current="page"
-                            href="{{ route('child_interface', ['id' => $child->id]) }}" style = "color: white">
+                            href="{{ route('Parent.child_interface', ['id' => $child->id]) }}" style = "color: white">
                             <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="currentColor"
                                 class="bi bi-house-door" viewBox="0 0 16 16">
                                 <path

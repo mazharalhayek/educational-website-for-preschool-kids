@@ -100,15 +100,12 @@ class ChildrenController extends Controller
 
     public function destroy($id)
     {
+        $remove_child_tutor = TutorChild::where('child_id',$id)->delete();
         $remove_child = Children::find($id)->delete();
         return redirect()->back();
     }
 
-    public function chat()
-    {
-        return view('tutor_info');
-    }
-
+   
     public function tutor_info($id)
     {
         $specific_tutor = Tutor::where('id',$id)->first();
@@ -129,8 +126,25 @@ class ChildrenController extends Controller
     {
         // $thisuserchild = Children::where('parent_id',Auth::id())->with('teached_by')->get();
         // dd($thisuserchild);
-        $childtutor = TutorChild::with('teached_by','teaches')->get();
-        return view('hired_tutors',compact('childtutor'));
+        $parents_child = Children::where('parent_id',Auth::id())->get();
+
+        foreach ($parents_child as $key)
+        {
+            $tutors_child = TutorChild::where('child_id',$key->id)->get();
+        }
+
+        foreach ($tutors_child as $key)
+        {
+            $child = Children::where('id',$key->child_id)->get();
+        }
+
+        foreach ($tutors_child as $key)
+        {
+            $tutor = Tutor::where('id',$key->tutor_id)->get();
+        }
+
+//        $childtutor = TutorChild::with('teached_by','teaches')->get();
+        return view('hired_tutors',compact('child'),compact('tutor'));
     }
 
     public function display_tutors()
@@ -139,9 +153,24 @@ class ChildrenController extends Controller
         return view('tutors_cards',compact('tutors'));
     }
 
-}
     public function chat(){
         return view('chat');
+    }
+
+
+    public function viewReports(){
+        $childs = Children::where('parent_id',Auth::user()->id)->with('my_parent')->get();
+        return view('Parent.progress_reports', compact('childs'));
+    }
+    public function buyBooks(){
+        return view ('Parent.buy_books'); 
+    }
+
+    public function viewWallet(){
+        return view('Parent.view_wallet'); 
+    }
+    public function issueFeedback(){
+        return view('Parent.issue_feedback');
     }
 
 }
