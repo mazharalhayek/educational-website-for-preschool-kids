@@ -2,19 +2,20 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Models\Parents;
+use App\Models\Admin;
 use App\Models\Tutor;
-use App\Providers\RouteServiceProvider;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Http\RedirectResponse;
+use App\Models\Parents;
+use Illuminate\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
-use Illuminate\View\View;
-use Illuminate\Validation\Rule;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Auth\Events\Registered;
+use App\Providers\RouteServiceProvider;
 
 class RegisteredUserController extends Controller
 {
@@ -46,7 +47,7 @@ class RegisteredUserController extends Controller
         switch($type)
         {
             case 'parent':
-                $user = Parents::create([
+                $parent = Parents::create([
                     'name' => $request->name,
                     'email' => $request->email,
                     'password' => Hash::make($request->password),
@@ -54,7 +55,7 @@ class RegisteredUserController extends Controller
                 ]);
                 break;
             case 'tutor':
-                $user = Tutor::create([
+                $tutor = Tutor::create([
                     'name' => $request->name,
                     'email' => $request->email,
                     'password' => Hash::make($request->password),
@@ -64,6 +65,14 @@ class RegisteredUserController extends Controller
                     'subject'=>$request->subject,
                 ]);
                 break;
+                case 'admin': 
+                    $admin = Admin::create([
+                        'name'=> $request->name,
+                        'email'=> $request->email,
+                        'password'=> Hash::make($request->password),
+                    
+                    ]); 
+                    break; 
             default:
                 return view('404');
         }

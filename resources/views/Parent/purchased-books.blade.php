@@ -8,7 +8,8 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">Apps</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ Issue Feedback</span>
+                <h4 class="content-title mb-0 my-auto">Apps</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ Buy
+                    Books</span>
             </div>
         </div>
         <div class="d-flex my-xl-auto right-content">
@@ -43,21 +44,41 @@
 @endsection
 @section('content')
     <!-- center container -->
-    <div class = "container-fluid">
-      <form action = "{{route('Parent.sendFeedback', ['type' => 'feedback'])}}" method="POST">
-        @csrf
-          <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label">Your Feedback</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="6" name="content"></textarea>
-          </div>
-          <button class="btn btn-primary" type="submit">Submit</button>
-        </form>
+    <div class="container-fluid">
+        <div class="row row-cols-1 row-cols-md-4 g-4">
+            @if ($purchased)
+                @foreach ($purchased as $item)
+                    <div class="col">
+                        <div class="card h-100" style="min-height: 450px">
+                            <img src="{{ asset('storage/' . $item->Cover) }}" class="card-img-top" alt="..."
+                                style="height: 65%">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $item->title }}</h5>
+                                <h6 class="card-text">{{ $item->author }}</h6>
+                                <p class="card-text" style="min-height: 40%">{{ $item->description }}</p>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            @else
+                <p>No purchased books available.</p>
+            @endif
+        </div>
     </div>
-    </div>
-</div>
 
-    
-   
+        </div>
+    </div>
+
+
+
+    </div>
+
+    </div>
+    </div>
+
+    </div>
+    </div>
+    </div>
 @endsection
 @section('js')
 @endsection
