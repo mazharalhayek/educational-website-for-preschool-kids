@@ -1,119 +1,157 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
-    background-image:url(images/dash_bg.jpg);
-  }
-.footer{
-background-color: #333;
-color: #fff;
-padding: 10px;
-text-align: center;
-font-size: 16px;
-height: 0.4cm;
-margin-bottom: -200px;
-bottom: 0;
-}
-footer a{color: #fff;
-text-decoration: none;
-font-weight: bold;}
-  .dashboard {
-    width: 80%;
-    padding-right: 25px;
-    float:right;
-  }
-  h1 {
-    text-align: center;
-    color: #000000;
-  }
-  .courses {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    margin-top: 20px;
-  }
-  .course {
-    width: 30%;
-    margin-bottom: 20px;
-    background-color: #f0f0f0;
-    padding: 10px;
-    border-radius: 5px;
-    font-weight: bolder;
-  }
-  .course h2 {
-    margin-top: 0;
-  }
-  .course p {
-    margin-bottom: 0;
-  }
-  .course a {
-    display: block;
-    margin-top: 10px;
-    text-align: center;
-    color: #fff;
-    background-color: #008080;
-    padding: 5px 10px;
-    border-radius: 5px;
-    text-decoration: none;
-  }
-  .course a:hover {
-    background-color: #005f5f;
-  }
-.hbut{
-width: 100px;
-height: 40px;
-color: #fff;
-border: none;
-border-radius: 10px;
-background-color: #2b3131;
-}
-nav pre{
-background-color: #008080;
-display: block;
-border-radius: 10px;
-padding-top: 5px;
-padding-bottom: 5px;
-}
-#prof{
-width:9cm;
-
-border-radius:15px;
-}
-#stud_info{
-  background-color: #008080;
-  float: left;
-  width: 6cm;
-  margin-top: 10px;
-  border-radius: 10px;
-  border: #fff solid 3px;
-}
-#my-options {
-  display: none; /* Hide the options by default */
-  position: relative; /* Position the options relative to the button */
-  left: 10%;
-  background-color: #f5f5f5; /* Change the background color to match your design */
-  border: 1px solid #ddd; /* Add a border to the options */
-width:auto;
-font-size:20px;
-text-align: leftf;
-}
-
-#my-button:focus + #my-options,
-#my-options:hover {
-  display: block; /* Show the options when the button is clicked or when the options are hovered */
-}
-#my-button{
-  width: 130px;
-  background-color: #008080;
-  border:none;
-  font-size: large;
-  text-align: left;
-}
-#my-button:hover{
-  background-color: #005f5f;
-}
-#buy_frame{
-  width: 10cm;
-  height: 10cm;
-  background-color: white;
+.sidebar {
+  background: pink;
+  max-width: 200px;
+  width: 200px; 
+  height: 100%;
+  min-height: 800px;
+  position: absolute;
+  border-radius: 50px; 
+  text-align: center;
+  top: 200px;
   
+  
+}
+.fix {
+  top: -20px; 
+  left: -270px; 
+}
+.info {
+  background: pink;
+  max-width: 200px;
+  min-height: 100px;
+  height: 150px;
+  width: 150px;
+  position: relative;
+  border-radius: 100%; 
+  text-align: center;
+  padding-top: 2rem;
+  left: 22px;
+  top: 15px;
+}
+div b {
+  font-size: 1.5rem; 
+  font-weight: bold;
+  color: white; 
+  
+}
+
+.welcome {
+  position: absolute; 
+  left: 270px; 
+  top: 28px;
+  width: 1300px; 
+  height: 150px; 
+  border-radius: 50px; 
+  background: pink;
+  display: grid; 
+  font-size: 5rem; 
+  font-weight: bold;
+  color: white; 
+  
+  
+  text-align: center;
+}
+
+.content-container {
+  
+  position: relative; 
+  min-width: 1300px; 
+  width: 80%;
+  
+  background: pink; 
+  border-radius: 50px;
+  top: 215px;
+  left: 50px;
+  display: grid; 
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto auto;
+  min-height: 800px;
+  row-gap: 20px; 
+  padding: 30px
+
+}
+.content-container-no-grid{
+  position: relative; 
+  min-width: 1300px; 
+  width: 80%;
+  background: pink; 
+  border-radius: 50px;
+  top: 215px;
+  left: 50px;
+  max-height: 820px;
+ 
+  padding: 30px
+}
+.content-container-fix {
+  gap: 10px; 
+  padding: 30px; 
+  padding-left: 44px; 
+  
+}
+div.card{
+  background: lightcoral; 
+}
+.content-container-flex ul
+{
+  position: relative; 
+  min-width: 1300px; 
+  width: 80%;
+  height: 900px;
+  background: pink; 
+  border-radius: 50px;
+  top: 215px;
+  left: 50px;
+  display: flex; 
+  gap: 20px;
+  padding: 30px
+}
+.card-body h6 {
+  font-size: 1.5rem; 
+  font-weight: 700; 
+  color: white; 
+}
+.card-body p {
+  font-size: 1.25rem; 
+  font-weight: 700; 
+  color: black; 
+}
+.list-flex {
+  gap: 20px; 
+  display: flex; 
+  
+}
+.list-flex > * {
+  flex: 1; 
+  color: white; 
+  font-size: 1.5rem; 
+  font-weight: 3rem; 
+
+}
+.grid-container {
+  display:grid;
+  grid-template-columns: auto auto;
+
+  column-gap: 50px;
+  row-gap: 10px;
+  position: relative; 
+}
+
+.contents{
+  position: relative; 
+  background: black; 
+  aspect-ratio: 1;
+  width: 400px; 
+  border-radius: 50px;
+  text-align: center;
+  
+}
+.contents-big {
+  position: absolute; 
+  background: black; 
+  height: 400px; 
+  width: 820px; 
+  border-radius: 50px;
+  text-align: center;
+  top: 450px; 
+  left: 450px; 
 }

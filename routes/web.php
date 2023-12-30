@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StudentDashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
@@ -51,14 +52,23 @@ Route::get('tutorinfo/{id}',[ChildrenController::class,'tutor_info'])->name('tut
 Route::post('hirenew/{id}',[ChildrenController::class,'hire_a_tutor'])->name('hire_a_tutor');
 //display all hired tutors
 Route::get('hiredtutors',[ChildrenController::class,'already_hired'])->name('hired_tutors');
+//Progress report
+Route::get('child-report', [ChildrenController::class,'viewReports'])->name('viewReports');
+//Buy Books
+Route::get('buy-books',[ChildrenController::class,'buyBooks'])->name('buyBooks');
+//View Wallet
+Route::get('view-wallet', [ChildrenController::class,'viewWallet'])->name('viewWallet');
+//Issue Feedback
+Route::get('issue-feedback',[ChildrenController::class, 'issueFeedback'])->name('issueFeedback');
+
 });
 
 //Admin Routes , everything related to the Admin
 Route::middleware('auth')->name('Admin.')->group(function(){
 //table of users acounts.
 Route::get('usersacc/{type}',[AdminController::class,'users_accounts'])->name('usersaccounts');
-
 });
+
 
 // //Child Routes ,everything related to the child...
 // Route::middlware('auth')->group(function(){
@@ -70,5 +80,14 @@ Route::get('usersacc/{type}',[AdminController::class,'users_accounts'])->name('u
 // Route::middlware('auth')->group(function(){
 
 // });
+
+//Student Dashboard Controllers
+    
+Route::middleware('auth')->group(function () {
+    Route::get('/child-profile/{id}', [StudentDashboardController::class,'getProfile'])->name('getProfile');
+    Route::get('child-book/{id}', [StudentDashboardController::class,'getBooks'])->name('getBooks');
+    Route::get('progress-report/{id}', [StudentDashboardController::class,'viewReport'])->name('viewReport');
+});
+   
 
 require __DIR__.'/auth.php';

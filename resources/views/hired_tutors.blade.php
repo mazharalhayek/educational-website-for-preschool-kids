@@ -26,9 +26,9 @@
 @endsection
 @section('content')
 				<!-- row -->
-                @foreach ($childtutor as $tutor)
+        
 
-                @foreach ($tutor->teaches as $item)
+                @foreach ($tutor as $item)
                     <div class="row row-sm">
                         <div class="col-xl-12">
                             <div class="card">
@@ -59,11 +59,11 @@
                                                         <h6 class="price">This tutor teaches these children</span></h6>
                                                         <table >
                                                             <tr>
-                                                                @foreach ($childtutor as $childs)
-                                                                    @foreach ($childs->teached_by as $child)
-                                                                    <th style="padding:10px" ><button class="add-to-cart btn btn-success" name="child_id" disabled>{{$child->name}}</button></th>
+                                                               
+                                                                    @foreach ($child as $childs)
+                                                                    <th style="padding:10px" ><button class="add-to-cart btn btn-success" name="child_id" disabled>{{$childs->name}}</button></th>
                                                                     @endforeach
-                                                                @endforeach
+                                                             
                                                             </tr>
                                                         </table>
                                                     </div>
@@ -74,7 +74,7 @@
                         </div>
                     </div>
                     @endforeach
-                @endforeach
+            
 				<!-- /row -->
 				<!-- row closed -->
 			</div>
