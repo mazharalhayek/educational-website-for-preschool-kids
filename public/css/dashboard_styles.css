@@ -1,19 +1,19 @@
 .sidebar {
   background: pink;
   max-width: 200px;
-  width: 200px; 
+  width: 200px;
   height: 100%;
   min-height: 800px;
   position: absolute;
-  border-radius: 50px; 
+  border-radius: 50px;
   text-align: center;
   top: 200px;
-  
-  
+
+
 }
 .fix {
-  top: -20px; 
-  left: -270px; 
+  top: -20px;
+  left: -270px;
 }
 .info {
   background: pink;
@@ -22,109 +22,109 @@
   height: 150px;
   width: 150px;
   position: relative;
-  border-radius: 100%; 
+  border-radius: 100%;
   text-align: center;
   padding-top: 2rem;
   left: 22px;
   top: 15px;
 }
 div b {
-  font-size: 1.5rem; 
+  font-size: 1.5rem;
   font-weight: bold;
-  color: white; 
-  
+  color: white;
+
 }
 
 .welcome {
-  position: absolute; 
-  left: 270px; 
+  position: absolute;
+  left: 270px;
   top: 28px;
-  width: 1300px; 
-  height: 150px; 
-  border-radius: 50px; 
+  width: 1300px;
+  height: 150px;
+  border-radius: 50px;
   background: pink;
-  display: grid; 
-  font-size: 5rem; 
+  display: grid;
+  font-size: 5rem;
   font-weight: bold;
-  color: white; 
-  
-  
+  color: white;
+
+
   text-align: center;
 }
 
 .content-container {
-  
-  position: relative; 
-  min-width: 1300px; 
+
+  position: relative;
+  min-width: 1300px;
   width: 80%;
-  
-  background: pink; 
+
+  background: pink;
   border-radius: 50px;
   top: 215px;
   left: 50px;
-  display: grid; 
+  display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: auto auto;
   min-height: 800px;
-  row-gap: 20px; 
+  row-gap: 20px;
   padding: 30px
 
 }
 .content-container-no-grid{
-  position: relative; 
-  min-width: 1300px; 
+  position: relative;
+  min-width: 1300px;
   width: 80%;
-  background: pink; 
+  background: pink;
   border-radius: 50px;
   top: 215px;
   left: 50px;
   max-height: 820px;
- 
+
   padding: 30px
 }
 .content-container-fix {
-  gap: 10px; 
-  padding: 30px; 
-  padding-left: 44px; 
-  
+  gap: 10px;
+  padding: 30px;
+  padding-left: 44px;
+
 }
 div.card{
-  background: lightcoral; 
+  background: lightcoral;
 }
 .content-container-flex ul
 {
-  position: relative; 
-  min-width: 1300px; 
+  position: relative;
+  min-width: 1300px;
   width: 80%;
   height: 900px;
-  background: pink; 
+  background: pink;
   border-radius: 50px;
   top: 215px;
   left: 50px;
-  display: flex; 
+  display: flex;
   gap: 20px;
   padding: 30px
 }
 .card-body h6 {
-  font-size: 1.5rem; 
-  font-weight: 700; 
-  color: white; 
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white;
 }
 .card-body p {
-  font-size: 1.25rem; 
-  font-weight: 700; 
-  color: black; 
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: black;
 }
 .list-flex {
-  gap: 20px; 
-  display: flex; 
-  
+  gap: 20px;
+  display: flex;
+
 }
 .list-flex > * {
-  flex: 1; 
-  color: white; 
-  font-size: 1.5rem; 
-  font-weight: 3rem; 
+  flex: 1;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 3rem;
 
 }
 .grid-container {
@@ -133,25 +133,25 @@ div.card{
 
   column-gap: 50px;
   row-gap: 10px;
-  position: relative; 
+  position: relative;
 }
 
 .contents{
-  position: relative; 
-  background: black; 
+  position: relative;
+  background: black;
   aspect-ratio: 1;
-  width: 400px; 
+  width: 400px;
   border-radius: 50px;
   text-align: center;
-  
+
 }
 .contents-big {
-  position: absolute; 
-  background: black; 
-  height: 400px; 
-  width: 820px; 
+  position: absolute;
+  background: black;
+  height: 400px;
+  width: 820px;
   border-radius: 50px;
   text-align: center;
-  top: 450px; 
-  left: 450px; 
+  top: 450px;
+  left: 450px;
 }

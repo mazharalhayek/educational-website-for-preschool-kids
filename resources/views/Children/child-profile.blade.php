@@ -6,12 +6,12 @@
 
         </div>
         <div class = "welcome">
-            <p class = "mt-auto"> 
+            <p class = "mt-auto">
                 Profile
         </div>
 
-        <!-- Main Content Container --> 
-   
+        <!-- Main Content Container -->
+
             <div class="content-container-no-grid py-5 h-100">
                 <div class="row justify-content-center align-items-center h-100">
                   <div class="col col-lg-6 mb-4 mb-lg-0 w-100 h-100">
@@ -19,8 +19,8 @@
                       <div class="row g-0">
                         <div class="col-md-4 gradient-custom text-center text-white"
                           style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
-                          <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
-                            alt="Avatar" class="img-fluid my-5" style="width: 400px;" />
+                          <img src="{{asset('images/'.$child->image)}}" onerror="this.onerror=null;this.src='{{ asset('images/kids3.png') }}';"
+                            alt="Avatar" class="img-fluid my-5" style="width: 500px;border-radius:20px;height:400px;transform:  translateX(10px);" />
                           <h5 class = "fw-7 fs-2">{{$child->name}}</h5>
                           <p class = "fw-7 fs-2"> Age: {{$child->age}}</p>
                           <i class="far fa-edit mb-5"></i>
@@ -34,20 +34,20 @@
                                 <h6>Parent's Name</h6>
                                 <p class="text-muted">{{$child->my_parent->name}}</p>
                               </div>
-                             
+
                             </div>
-                        
+
                             <div class="row pt-1">
                               <div class="col-6 mb-3">
-                                <h6>Created At</h6>
-                                <p class="text-muted">{{$child->created_at}}</p>
+                                <h6>Joined In</h6>
+                                <p class="text-muted">{{$child->created_at->format('Y-m-d')}}</p>
                               </div>
                               <div class="col-6 mb-3">
                                 <h6>Last Updated At</h6>
-                                <p class="text-muted">{{$child->updated_at}}</p>
+                                <p class="text-muted">{{$child->updated_at->format('Y-m-d')}}</p>
                               </div>
                             </div>
-                        
+
                           </div>
                         </div>
                       </div>
@@ -55,11 +55,7 @@
                   </div>
                 </div>
               </div>
-
-            
         </div>
-
-
         <!-- SideBar -->
         <div class = "col mt-3 ms-3  | sidebar">
             <ul class="nav flex-column mx-auto mt-3 pt-2">

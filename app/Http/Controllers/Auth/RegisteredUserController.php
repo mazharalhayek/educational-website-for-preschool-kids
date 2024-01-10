@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Admin;
 use App\Models\Tutor;
 use App\Models\Parents;
+use App\Models\Image;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -39,43 +40,8 @@ class RegisteredUserController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'type' => ['required', Rule::in(['parent', 'tutor', 'admin', 'kid'])],
-            'birth_date'=>['required','date']
+            'birth_date'=>['required','date'],
         ]);
-
-        $type = $request->type;
-
-        switch($type)
-        {
-            case 'parent':
-                $parent = Parents::create([
-                    'name' => $request->name,
-                    'email' => $request->email,
-                    'password' => Hash::make($request->password),
-                    'birth_date'=>$request->birth_date,
-                ]);
-                break;
-            case 'tutor':
-                $tutor = Tutor::create([
-                    'name' => $request->name,
-                    'email' => $request->email,
-                    'password' => Hash::make($request->password),
-                    'birth_date'=>$request->birth_date,
-                    'salary' =>$request->salary,
-                    'qualifications'=>$request->qualifications,
-                    'subject'=>$request->subject,
-                ]);
-                break;
-                case 'admin': 
-                    $admin = Admin::create([
-                        'name'=> $request->name,
-                        'email'=> $request->email,
-                        'password'=> Hash::make($request->password),
-                    
-                    ]); 
-                    break; 
-            default:
-                return view('404');
-        }
 
         $user = User::create([
             'name' => $request->name,
@@ -88,6 +54,45 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
         Auth::login($user);
+
+        $type = $request->type;
+
+        switch($type)
+        {
+            case 'parent':
+                $parent = Parents::create([
+                    'id'=>Auth::id(),
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'password' => Hash::make($request->password),
+                    'birth_date'=>$request->birth_date,
+                ]);
+                break;
+            case 'tutor':
+                $tutor = Tutor::create([
+                    'id'=>Auth::id(),
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'password' => Hash::make($request->password),
+                    'birth_date'=>$request->birth_date,
+                    'salary' =>$request->salary,
+                    'qualifications'=>$request->qualifications,
+                    'subject'=>$request->subject,
+                    'image'=>null,
+                ]);
+                break;
+            case 'admin':
+                $admin = Admin::create([
+                    'id'=>Auth::id(),
+                    'name'=> $request->name,
+                    'email'=> $request->email,
+                    'password'=> Hash::make($request->password),
+
+                ]);
+                break;
+            default:
+                return view('404');
+        }
 
         return redirect(RouteServiceProvider::HOME);
     }

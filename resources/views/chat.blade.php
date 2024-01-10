@@ -5,32 +5,7 @@
 				<!-- breadcrumb -->
 				<div class="breadcrumb-header justify-content-between">
 					<div class="my-auto">
-						<div class="d-flex"><h4 class="content-title mb-0 my-auto">Mail</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ Chat</span></div>
-					</div>
-					<div class="d-flex my-xl-auto right-content">
-						<div class="pr-1 mb-3 mb-xl-0">
-							<button type="button" class="btn btn-info btn-icon ml-2"><i class="mdi mdi-filter-variant"></i></button>
-						</div>
-						<div class="pr-1 mb-3 mb-xl-0">
-							<button type="button" class="btn btn-danger btn-icon ml-2"><i class="mdi mdi-star"></i></button>
-						</div>
-						<div class="pr-1 mb-3 mb-xl-0">
-							<button type="button" class="btn btn-warning  btn-icon ml-2"><i class="mdi mdi-refresh"></i></button>
-						</div>
-						<div class="mb-3 mb-xl-0">
-							<div class="btn-group dropdown">
-								<button type="button" class="btn btn-primary">14 Aug 2019</button>
-								<button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" id="dropdownMenuDate" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<span class="sr-only">Toggle Dropdown</span>
-								</button>
-								<div class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuDate" data-x-placement="bottom-end">
-									<a class="dropdown-item" href="#">2015</a>
-									<a class="dropdown-item" href="#">2016</a>
-									<a class="dropdown-item" href="#">2017</a>
-									<a class="dropdown-item" href="#">2018</a>
-								</div>
-							</div>
-						</div>
+						<div class="d-flex"><h4 class="content-title mb-0 my-auto">Chat</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ Chat with parents</span></div>
 					</div>
 				</div>
 				<!-- breadcrumb -->
@@ -42,35 +17,23 @@
 						<div class="card">
 							<div class="main-content-left main-content-left-chat">
 								<nav class="nav main-nav-line main-nav-line-chat">
-									<a class="nav-link active" data-toggle="tab" href="">Recent Chat</a> <a class="nav-link" data-toggle="tab" href="">Groups</a> <a class="nav-link" data-toggle="tab" href="">Calls</a>
+									<a class="nav-link active" data-toggle="tab" href="">All Chats</a>
 								</nav>
-								<div class="main-chat-contacts-wrapper">
-									<label class="main-content-label main-content-label-sm">Active Tutors (5)</label>
-									<div class="main-chat-contacts" id="chatActiveContacts">
-										<div>
-											<div class="main-img-user online"><img alt="" src="{{URL::asset('assets/img/faces/3.jpg')}}"></div><small>Adrian</small>
-										</div>
-										
-										<div>
-											<div class="main-chat-contacts-more">
-												20+
-											</div><small>More</small>
-										</div>
-									</div><!-- main-active-contacts -->
-								</div><!-- main-chat-active-contacts -->
-								<div class="main-chat-list" id="ChatList">
-									<div class="media new">
-										<div class="main-img-user online">
-											<img alt="" src="{{URL::asset('assets/img/faces/5.jpg')}}"> <span>2</span>
-										</div>
-										<div class="media-body">
-											<div class="media-contact-name">
-												<span>Socrates Itumay</span> <span>2 hours</span>
-											</div>
-											<p>Nam quam nunc, blandit vel aecenas et ante tincid</p>
-										</div>
-									</div>
-								</div><!-- main-chat-list -->
+                                    @foreach ($all_chats as $one_chat)
+                                        <div class="main-chat-list" id="ChatList">
+                                            <div class="media new">
+                                                <div class="main-img-user online">
+                                                    <img alt="" src="{{URL::asset('assets/img/faces/5.jpg')}}"> <span>2</span>
+                                                </div>
+                                                <div class="media-body">
+                                                    <div class="media-contact-name">
+                                                        <span>{{$one_chat->parent_chat->name}}</span> <span>{{$one_chat->created_at->diffForHumans()}}</span>
+                                                    </div>
+                                                    <p>{{$one_chat->content}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
 							</div>
 						</div>
 					</div>

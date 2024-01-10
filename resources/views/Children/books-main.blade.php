@@ -11,17 +11,18 @@
 
         <!-- Main Content Container -->
         <div class = "content-container pt-3 content-container-fix">
+            @foreach ($purchased_books as $book)
+
 
             <div class="card" style="width: 24rem; max-height: 600px;">
-                <img src="/images/books/lost-and-found.jpeg" class="card-img-top" alt="...">
+                <img src="{{asset('storage/'.$book->Cover)}}" class="card-img-top" alt="..." style="height: 65%">
                 <div class="card-body">
-                    <h5 class="card-title">Book title</h5>
+                    <h5 class="card-title">{{$book->title}}</h5>
                     <p class="card-text"
-                        style="  font-size: 1rem; 
-                    font-weight: 400; 
+                        style="  font-size: 1rem;
+                    font-weight: 400;
                     color: black;">
-                        Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
+                        {{$book->description}}</p>
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                         Read Book
                     </button>
@@ -31,12 +32,12 @@
                         <div class="modal-dialog modal-xl">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Book title</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">{{$book->title}}</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <embed type="application/pdf" src="/pdfs/Biometrics.pdf" class = "mx-auto"
+                                    <embed type="application/pdf" src="{{asset('storage/'.$book->PDF)}}" class = "mx-auto"
                                         width="1100px" height="600" style = "position: relative">
                                 </div>
                                 <div class="modal-footer">
@@ -49,7 +50,7 @@
                 </div>
             </div>
 
-
+        @endforeach
 
             <!-- SideBar -->
             <div class = "col mt-3 ms-3  | sidebar fix">

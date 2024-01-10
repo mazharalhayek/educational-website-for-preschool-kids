@@ -26,5 +26,4 @@ class TutorChild extends Model
     {
         return $this->hasMany(Tutor::class, 'id', 'id');
     }
-
 }

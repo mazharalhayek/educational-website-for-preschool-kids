@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Parents;
 use App\Models\Children;
 use App\Models\Services;
+use App\Models\Tutor;
 
 class AdminController extends Controller
 {
@@ -27,14 +28,17 @@ class AdminController extends Controller
         switch($type){
             case 'parent':
                 $accounts = Parents::query()->get();
-                return view('parentslist',compact('accounts'));
+                return view('admin.parentslist',compact('accounts'));
                 break;
 
             case 'children':
                 $accounts = Children::query()->with('my_parent')->get();
-                return view('childrenlist',compact('accounts'));
+                return view('admin.childrenlist',compact('accounts'));
                 break;
-
+            case 'tutor':
+                $accounts = Tutor::query()->get();
+                return view('admin.tutorslist',compact('accounts'));
+                break;
             default:
                 return view('404');
         }

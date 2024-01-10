@@ -23,7 +23,7 @@ return new class extends Migration
             $table->float('salary');
             $table->string('qualifications')->nullable(false);
             $table->string('subject');
-            
+            $table->binary('image')->nullable(true)->default(null);
             $table->timestamps();
         });
     }

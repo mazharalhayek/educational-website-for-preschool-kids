@@ -10,7 +10,7 @@
 				<div class="col-md-5 col-lg-6 col-xl-7 d-none d-md-flex bg-primary-transparent">
 					<div class="row wd-100p mx-auto text-center">
 						<div class="col-md-12 col-lg-12 col-xl-12 my-auto mx-auto wd-100p">
-							<img src="{{URL::asset('assets/img/media/underconstruction.png')}}" class="my-auto ht-xl-80p wd-md-100p wd-xl-80p mx-auto" alt="logo">
+							<img src="{{asset('images/under-maintenance.png')}}" class="my-auto ht-xl-80p wd-md-100p wd-xl-80p mx-auto" alt="logo">
 						</div>
 					</div>
 				</div>
@@ -48,28 +48,6 @@
 														<p class="mt-2">Seconds</p>
 													</div>
 												</div>
-											</div>
-											<div class="input-group mt-5 text-center sub-input mt-1 ml-auto mr-auto mt-6">
-												<input type="text" class="form-control input-lg " placeholder="Enter your Email">
-												<div class="input-group-append ">
-													<button type="button" class="btn btn-danger-gradient btn-lg br-tr-3  br-br-3">
-														Subscribe
-													</button>
-												</div>
-											</div>
-											<div class="mt-4 d-flex mx-auto text-center justify-content-center">
-												<button class="btn btn-icon btn-facebook" type="button">
-													<span class="btn-inner--icon"> <i class="bx bxl-facebook tx-20 tx-facebook"></i> </span>
-												</button>
-												<button class="btn btn-icon" type="button">
-													<span class="btn-inner--icon"> <i class="bx bxl-twitter tx-20 tx-info"></i> </span>
-												</button>
-												<button class="btn btn-icon" type="button">
-													<span class="btn-inner--icon"> <i class="bx bxl-linkedin tx-20 tx-indigo"></i> </span>
-												</button>
-												<button class="btn btn-icon" type="button">
-													<span class="btn-inner--icon"> <i class="bx bxl-instagram tx-20 tx-pink"></i> </span>
-												</button>
 											</div>
 										</div>
 									</div>

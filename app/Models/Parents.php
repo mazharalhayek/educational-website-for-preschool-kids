@@ -18,6 +18,7 @@ class Parents extends Model
     use HasFactory;
     protected $fillable =
         [
+            'id',
             'name',
             'email',
             'password',
@@ -32,8 +33,17 @@ class Parents extends Model
 
     public function books()
     {
-        return $this->belongsToMany(Book::class, 'parent_books');
+        return $this->belongsToMany(Book::class, 'parent_books','parent_id','book_id');
     }
 
-   
+
+    /**
+     * The roles that belong to the Parents
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function roles(): BelongsToMany
+    {
+        return $this->belongsToMany(Role::class, 'role_user_table', 'user_id', 'role_id');
+    }
 }

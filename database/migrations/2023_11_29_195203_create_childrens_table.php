@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreign('parent_id')->references('id')->on('parents');
             $table->Integer("age");
             $table->string("password");
-            $table->binary('image')->nullable();
+            $table->binary('image')->nullable(true)->default(null);
             $table->rememberToken();
             $table->timestamps();
         });

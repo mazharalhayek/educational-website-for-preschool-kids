@@ -72,10 +72,8 @@ form {
                                 </div>
                             </div>
                         </div>
-      <div class="flex-1 bg-indigo-100 text-center hidden lg:flex">
-        <div><img src="{{asset('images/Collage—Girl3.png')}}" width="400px" alt="" style="margin-right: 800px;margin-top:-410px"> </div>
-      </div>
     </div>
+        <div><img src="{{asset('images/Collage—Girl3.png')}}" width="400px" align="left" style="margin-top:-410px"> </div>
     <div class="REMOVE-THIS-ELEMENT-IF-YOU-ARE-USING-THIS-PAGE hidden treact-popup fixed inset-0 flex items-center justify-center" style="background-color: rgba(0,0,0,0.3);">
         <div class="max-w-lg p-8 sm:pb-4 bg-white rounded shadow-lg text-center sm:text-left">
 

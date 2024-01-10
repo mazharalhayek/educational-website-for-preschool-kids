@@ -51,7 +51,7 @@
             <x-primary-button style="background-color: rgb(13, 16, 68)">{{ __('Save') }}</x-primary-button>
 
             @if (session('status') === 'profile-updated')
-                <p 
+                <p
                     x-data="{ show: true }"
                     x-show="show"
                     x-transition

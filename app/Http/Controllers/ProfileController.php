@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use App\Models\Parents;
+use App\Models\Tutor;
+use App\Models\Admin;
 
 class ProfileController extends Controller
 {
@@ -34,6 +37,29 @@ class ProfileController extends Controller
 
         $request->user()->save();
 
+        switch(Auth::user()->type)
+        {
+            case 'parent':
+                $update = Parent::find(Auth::id());
+               $update->name = $request->name;
+               $update->email = $request->email;
+               $update->save();
+                break;
+            case 'tutor':
+                $update = Tutor::find(Auth::id());
+                $update->name = $request->name;
+                $update->email = $request->email;
+                $update->save();
+                break;
+            case 'admin':
+                $update = Admin::find(Auth::id());
+                $update->name = $request->name;
+                $update->email = $request->email;
+                $update->save();
+                break;
+            default:
+                return view('404');
+        }
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
 

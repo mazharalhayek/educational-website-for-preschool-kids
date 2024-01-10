@@ -14,19 +14,19 @@ class BookController extends Controller
 {
     public function show_parent_books()
     {
-        $parent_books = ParentBook::where('parent_id', auth()->user()->id)->get();
-        foreach ($parent_books as $item)
-        {
+        $parent_books = Parents::where('id',Auth::id())->with('books')->first();
+        $purchased_books = $parent_books->books;
+        // foreach ($parent_books as $item)
+        // {
+        //     $purchased=Book::where('id', $item->book_id)->get();
+        // }
 
-            $purchased=Book::where('id', $item->book_id)->get(); 
-        }
-        
-        return view('Parent.purchased-books', compact('purchased'));
+        return view('Parent.purchased-books', compact('purchased_books'));
     }
     public function store(BookRequest $request)
     {
         // Validate the request
-        $validatedData = $request->validated(); 
+        $validatedData = $request->validated();
 
         // Handle cover image upload
         $coverPath = $request->file('Cover')->store('covers', 'public');
@@ -41,17 +41,21 @@ class BookController extends Controller
 
         return redirect()->back();
     }
-    public function confirmPurchase(Request $request, $id)
+    public function confirmPurchase($id)
 {
     $book = Book::findOrFail($id);
-    $parent = Auth::user();
+    $existing = ParentBook::where('parent_id',Auth::id())->where('book_id',$id)->first();
 
-    // Add the book to the parent's collection
+    if($existing)
+    {
+        return redirect()->back()->with('alert','This book is already purchased!.');
+    }
+
     ParentBook::create([
-        'parent_id' => $parent->id,
+        'parent_id' => Auth::user()->id,
         'book_id' => $book->id,
     ]);
-    
-    return redirect()->back(); 
+
+    return redirect()->back();
 }
 }

@@ -24,4 +24,16 @@ class Children extends Model
         return $this->belongsTo(Parents::class, 'parent_id', 'id');
     }
 
+
+    public function my_tutors()
+    {
+        return $this->belongsToMany(Tutor::class, 'tutor_children', 'child_id', 'tutor_id');
+    }
+
+
+    public function my_progress()
+    {
+        return $this->hasMany(Progress::class, 'child_id', 'id');
+    }
+
 }

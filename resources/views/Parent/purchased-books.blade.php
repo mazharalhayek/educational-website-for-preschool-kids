@@ -8,7 +8,7 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">Apps</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ Buy
+                <h4 class="content-title mb-0 my-auto">Books</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ Buy
                     Books</span>
             </div>
         </div>
@@ -46,12 +46,11 @@
     <!-- center container -->
     <div class="container-fluid">
         <div class="row row-cols-1 row-cols-md-4 g-4">
-            @if ($purchased)
-                @foreach ($purchased as $item)
+                @foreach ($purchased_books as $item)
                     <div class="col">
-                        <div class="card h-100" style="min-height: 450px">
+                        <div class="card h-50" style="min-height: 400px">
                             <img src="{{ asset('storage/' . $item->Cover) }}" class="card-img-top" alt="..."
-                                style="height: 65%">
+                                style="height: 50%">
                             <div class="card-body">
                                 <h5 class="card-title">{{ $item->title }}</h5>
                                 <h6 class="card-text">{{ $item->author }}</h6>
@@ -60,25 +59,10 @@
                         </div>
                     </div>
                 @endforeach
-            @else
-                <p>No purchased books available.</p>
-            @endif
         </div>
     </div>
+</div>
 
-        </div>
-    </div>
-
-
-
-    </div>
-
-    </div>
-    </div>
-
-    </div>
-    </div>
-    </div>
 @endsection
 @section('js')
 @endsection

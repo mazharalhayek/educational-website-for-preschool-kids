@@ -18,7 +18,6 @@ return new class extends Migration
             $table->unsignedBigInteger('parent_id');
             $table->unsignedBigInteger('book_id');
             $table->timestamps();
-
             // Define foreign key constraints
             $table->foreign('parent_id')->references('id')->on('parents')->onDelete('cascade');
             $table->foreign('book_id')->references('id')->on('books')->onDelete('cascade');

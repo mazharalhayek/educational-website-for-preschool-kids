@@ -6,34 +6,66 @@ use App\Models\Children;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Traits\Response;
+use App\Models\Progress;
+use App\Models\Parents;
 
-  /**
-     * Update the specified resource in storage.
-     *
-     * 
-     * @param  \App\Models\Children  $children
-     * @return \Illuminate\Http\Response
-     */
+
 
 class StudentDashboardController extends Controller
 {
     public function getProfile($id)
-{
-    // Assuming you have a method like findChildById in your Child model
-    $child = Children::find($id); // Replace 1 with the actual child ID you want to display
+    {
+        $child = Children::find($id);
 
-    if (!$child) {
-        abort(404); // Show a 404 error if the child is not found
+        if (!$child)
+        {
+            abort(404);
+        }
+        return view('Children.child-profile', compact('child'));
     }
-    return view('Children.child-profile', ['child' => $child]);
-}
 
-public function getBooks($id) {
-    $child = Children::find($id);
-    return view('Children.books-main', ['child' => $child]);
-}
-public function viewReport($id) {
-    $child = Children::find($id);
-    return view('Children.progress-report', ['child' => $child]);
-}
+    public function subject_page($subject,$child)
+    {
+        $child = Children::where('id',$child)->first();
+        return view('Children.lesson_videos',compact('subject'),compact('child'));
+    }
+
+    public function getBooks($id)
+    {
+        $child = Children::find($id);
+        $parent_books = Parents::where('id',Auth::id())->with('books')->first();
+        $purchased_books = $parent_books->books;
+        return view('Children.books-main',compact('child'),compact('purchased_books'));
+    }
+
+    public function viewReport($id)
+    {
+        $child = Children::where('id',$id)->with('my_progress')->first();
+        return view('Children.progress-report', compact('child'));
+    }
+
+    public function increase_progress($child_id,$role)
+    {
+        $child_progress = Progress::where('child_id',$child_id)
+                                    ->where('role',$role)->first();
+
+        if($child_progress)
+        {
+            $child_progress->grade = $child_progress->grade + 10;
+            $child_progress->save();
+            return redirect()->back();
+        }
+
+        $child_progress = Progress::create([
+            'child_id'=>$child_id,
+            'grade'=> 10,
+            'role'=>$role,
+        ]);
+        return redirect()->back();
+    }
+
+    public function log_out()
+    {
+        return redirect()->back();
+    }
 };

@@ -22,7 +22,17 @@ class Book extends Model
     ];
 
     public function parents()
-{
-    return $this->belongsToMany(Parent::class, 'parent_books');
-}
+    {
+        return $this->belongsToMany(Parents::class, 'parent_books','book_id','id');
+    }
+
+    /**
+     * The roles that belong to the Book
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function roles(): BelongsToMany
+    {
+        return $this->belongsToMany(Role::class, 'role_user_table', 'user_id', 'role_id');
+    }
 }

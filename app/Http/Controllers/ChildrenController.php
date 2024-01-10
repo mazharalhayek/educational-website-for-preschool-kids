@@ -54,10 +54,10 @@ class ChildrenController extends Controller
                 'parent_id'   => Auth::user()->id,
                 'age'         => $val_request['age'],
                 'password'    => $val_request['password'],
-                'image'       => $val_request['image'],
+                'image'       => $request['image'],
             ]);
 
-            return redirect()->back();
+            return redirect(route('Parent.getchilds'));
         }
 
         $newchild = Children::create([
@@ -67,33 +67,21 @@ class ChildrenController extends Controller
             'password'    => $val_request['password'],
         ]);
 
-        return redirect()->back();
+        return redirect(route('Parent.getchilds'));
     }
-
-    public function show(Children $children)
-    {
-        //
-    }
-
 
     public function edit($child)
     {
-        $editchild = Children::find($child)->first();
+        $editchild = Children::find($child);
         return view('Parent.edit_child_acc',compact('editchild'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateChildrenRequest  $request
-     * @param  \App\Models\Children  $children
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(StoreChildrenRequest $request, $child)
     {
         $val_request = $request->validated();
 
-        $updatechild = Children::find($child)->where('parent_id',auth()->user()->id)->first();
+        $updatechild = Children::find($child);
         $updatechild->update($val_request);
         return redirect(route('Parent.getchilds'));
     }
@@ -106,7 +94,7 @@ class ChildrenController extends Controller
         return redirect()->back();
     }
 
-   
+
     public function tutor_info($id)
     {
         $specific_tutor = Tutor::where('id',$id)->first();
@@ -116,36 +104,26 @@ class ChildrenController extends Controller
 
     public function hire_a_tutor(Request $request,$id)
     {
+
+        $already_hired = TutorChild::where('tutor_id',$id)->where('child_id',$request->child_id)->first();
+
+        if($already_hired)
+        {
+            return redirect()->back()->with('alert','Tutor already hired for this child!.');
+        }
+
         $hire = TutorChild::create([
             'child_id' => $request['child_id'],
             'tutor_id' => $id,
         ]);
+
         return redirect()->back();
     }
 
-    public function already_hired()
+    public function already_hired($id)
     {
-        // $thisuserchild = Children::where('parent_id',Auth::id())->with('teached_by')->get();
-        // dd($thisuserchild);
-        $parents_child = Children::where('parent_id',Auth::id())->get();
-
-        foreach ($parents_child as $key)
-        {
-            $tutors_child = TutorChild::where('child_id',$key->id)->get();
-        }
-
-        foreach ($tutors_child as $key)
-        {
-            $child = Children::where('id',$key->child_id)->get();
-        }
-
-        foreach ($tutors_child as $key)
-        {
-            $tutor = Tutor::where('id',$key->tutor_id)->get();
-        }
-
-//        $childtutor = TutorChild::with('teached_by','teaches')->get();
-        return view('hired_tutors',compact('child'),compact('tutor'));
+        $thisuserchild = Children::where('parent_id',Auth::id())->where('id',$id)->with('my_tutors')->first();
+        return view('hired_tutors',compact('thisuserchild'));
     }
 
     public function display_tutors()
@@ -158,20 +136,30 @@ class ChildrenController extends Controller
         return view('chat');
     }
 
+    public function unhire_a_tutor(Request $request,$id)
+    {
+        $tutor = TutorChild::where('tutor_id',$request->tutor_id)->where('child_id',$id)->delete();
+        return redirect()->back();
+    }
 
     public function viewReports(){
-        $childs = Children::where('parent_id',Auth::user()->id)->with('my_parent')->get();
+        $childs = Children::where('parent_id',Auth::user()->id)
+                            ->with('my_parent')
+                            ->with('my_progress')
+                            ->get();
         return view('Parent.progress_reports', compact('childs'));
     }
+    
     public function buyBooks(){
-        $books = Book::all(); 
-        return view ('Parent.buy_books', compact('books')); 
+        $books = Book::all();
+        return view ('Parent.buy_books', compact('books'));
     }
 
     public function viewWallet(){
-        return view('Parent.view_wallet'); 
+        return view('Parent.view_wallet');
     }
     public function issueFeedback(){
+
         return view('Parent.issue_feedback');
     }
 

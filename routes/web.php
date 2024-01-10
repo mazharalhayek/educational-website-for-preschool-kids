@@ -4,9 +4,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\TutorController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ChildrenController;
 use App\Http\Controllers\ServicesController;
+use App\Models\Tutor;
 use App\Http\Controllers\StudentDashboardController;
 
 
@@ -51,8 +53,10 @@ Route::get('alltutors',[ChildrenController::class,'display_tutors'])->name('disp
 Route::get('tutorinfo/{id}',[ChildrenController::class,'tutor_info'])->name('tutor_info');
 //hire a new tutor
 Route::post('hirenew/{id}',[ChildrenController::class,'hire_a_tutor'])->name('hire_a_tutor');
+//unhire a tutor
+Route::get('unhire/{id}',[ChildrenController::class,'unhire_a_tutor'])->name('unhire_a_tutor');
 //display all hired tutors
-Route::get('hiredtutors',[ChildrenController::class,'already_hired'])->name('hired_tutors');
+Route::get('hiredtutors/{id}',[ChildrenController::class,'already_hired'])->name('hired_tutors');
 //Progress report
 Route::get('child-report', [ChildrenController::class,'viewReports'])->name('viewReports');
 //Buy Books
@@ -65,8 +69,8 @@ Route::get('view-wallet', [ChildrenController::class,'viewWallet'])->name('viewW
 Route::get('issue-feedback',[ChildrenController::class, 'issueFeedback'])->name('issueFeedback');
 //Post Issue Feedback
 Route::post('send-feedback/{type}', [ServicesController::class,'store'])->name('sendFeedback');
-// Buy Book 
-Route::post('/books/{id}/confirm-purchase', [BookController::class, 'confirmPurchase'])->name('confirmPurchase');
+// Buy Book
+Route::get('confirm-purchase/{book}', [BookController::class, 'confirmPurchase'])->name('confirmPurchase');
 });
 
 //Admin Routes , everything related to the Admin
@@ -74,10 +78,10 @@ Route::middleware('auth')->name('Admin.')->group(function(){
 //table of users acounts.
 Route::get('usersacc/{type}',[AdminController::class,'users_accounts'])->name('usersaccounts');
 //display user feedback
-Route::get('display-feedback',[AdminController::class,'displayFeedback'])->name('displayFeedback'); 
+Route::get('display-feedback',[AdminController::class,'displayFeedback'])->name('displayFeedback');
 //delete user feedback
-Route::delete('delete-feedback/{id}', [ServicesController::class,'destroy'])->name('destroyFeedback'); 
-//add Book page 
+Route::delete('delete-feedback/{id}', [ServicesController::class,'destroy'])->name('destroyFeedback');
+//add Book page
 Route::get('add-Book', [AdminController::class,'addBook'])->name('addBook');
 // add book post
 Route::post('add-book-post', [BookController::class,'store'])->name('postBook');
@@ -90,18 +94,37 @@ Route::post('add-book-post', [BookController::class,'store'])->name('postBook');
 
 // });
 
-// //Tutor Routes , everything related to the tutor
-// Route::middlware('auth')->group(function(){
-
-// });
+//Tutor Routes , everything related to the tutor
+Route::middleware('auth')->name('Tutor.')->group(function(){
+Route::get('updatepfp',[TutorController::class,function(){
+    $image = Tutor::find(Auth::id());
+    return view('tutors.update_pfp',compact('image'));
+}])->name('updateinterface');
+//update the profile pic
+Route::put('updatepfp',[TutorController::class,'update_pfp'])->name('updatepfp');
+//remove the profile pic
+Route::put('removepfp',[TutorController::class,'remove_pfp'])->name('removepfp');
+//get tutor's chat with a parent
+Route::get('chating',[TutorController::class,'chating'])->name('chating');
+//get all children that the tutor teaches
+Route::get('get_students',[TutorController::class,'get_students'])->name('get_students');
+//check a specific child's progress
+Route::get('student_progress/{id}',[TutorController::class,'student_progress'])->name('student_progress');
+});
 
 //Student Dashboard Controllers
-    
+
 Route::middleware('auth')->group(function () {
     Route::get('/child-profile/{id}', [StudentDashboardController::class,'getProfile'])->name('getProfile');
     Route::get('child-book/{id}', [StudentDashboardController::class,'getBooks'])->name('getBooks');
     Route::get('progress-report/{id}', [StudentDashboardController::class,'viewReport'])->name('viewReport');
+    Route::get('lesson_page/{subject}/{child}',[StudentDashboardController::class,'subject_page'])->name('subject_page');
+    Route::post('incrementProgress/{child_id}/{role}',[StudentDashboardController::class,'increase_progress'])->name('incrementProgress');
+    Route::get('student_logout',[ChildrenController::class,'index'])->name('student_logout');
 });
-   
+
+Route::get('under_construction',function(){
+    return view('underconstruction');
+})->name('under_construction');
 
 require __DIR__.'/auth.php';

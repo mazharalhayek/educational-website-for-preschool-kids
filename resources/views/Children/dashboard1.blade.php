@@ -9,20 +9,18 @@
             <p class = "mt-auto"> Welcome!</p>
         </div>
 
-        <!-- Main Content Container --> 
+        <!-- Main Content Container -->
         <div class = "content-container pt-3">
-            <div class = "contents text-center"> 
-                <img src="/images/letter-lesson.png" alt="letters" class = "img-fluid rounded img-thumbnail" style="min-height: 400px">
+            <div class = "contents text-center">
+                <a href="{{route('subject_page',['subject'=>'letters','child'=>$child->id])}}"><img src="/images/letter-lesson.png" alt="letters" class = "img-fluid rounded img-thumbnail" style="min-height: 400px"></a>
             </div>
             <div class = "contents text-center">
-                <img src="/images/math-logo.webp" alt="math" class = "img-fluid rounded img-thumbnail" style="min-height: 400px">
+                <a href="{{route('subject_page',['subject'=>'math','child'=>$child->id])}}"><img src="/images/math-logo.webp" alt="math" class = "img-fluid rounded img-thumbnail" style="min-height: 400px"></a>
             </div>
             <div class = "contents text-center">
-                <img src="/images/shape-logo.jpg" alt="shape" class = "img-fluid rounded img-thumbnail" style="min-height: 400px"> </div>
-          
+               <a href="{{route('subject_page',['subject'=>'shapes','child'=>$child->id])}}"><img src="/images/shape-logo.jpg" alt="shape" class = "img-fluid rounded img-thumbnail" style="min-height: 400px"> </div></a>
             <!-- This div is empty -->
             <div class = "contents-big text-center"> </div>
-            
             <div class = "contents text-center">
                 <a href="{{route('getBooks', ['id' => $child->id])}} ">
                 <img src="/images/book-logo.png" alt="book" class = "img-fluid rounded img-thumbnail" style="min-height: 400px"> </div>
@@ -90,8 +88,8 @@
                         Progress Report
                     </a>
                 </li>
-                <li class="nav-item pt-2" >
-                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">
+                <li class="nav-item pt-2">
+                    <a class="nav-link" href="{{route('student_logout')}}" style="color: white">
                         <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="currentColor"
                             class="bi bi-door-closed-fill" viewBox="0 0 16 16">
                             <path
@@ -101,10 +99,10 @@
                         Logout
                     </a>
                 </li>
+
             </ul>
         </div>
 
     </div>
-
     </div>
 @endsection
