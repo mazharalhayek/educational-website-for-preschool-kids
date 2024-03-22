@@ -10,7 +10,7 @@ use App\Models\Tutor;
 
 class AdminController extends Controller
 {
-
+    
     public function index($id)
     {
         if(view()->exists($id)){
@@ -20,7 +20,6 @@ class AdminController extends Controller
         {
             return view('404');
         }
-
     }
 
     public function users_accounts($type){
