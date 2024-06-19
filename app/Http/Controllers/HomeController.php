@@ -2,10 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use Carbon\Carbon;
-
 use illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -16,28 +12,30 @@ class HomeController extends Controller
         $this->middleware('auth');
     }
 
-
-    public function index()
+    /**
+     * Return a view according to the authenticated user's role.
+     * [ChildrenServices => none]
+     * @param none
+     * @return \view
+     */
+    public function index(): \Illuminate\View\View
     {
         if(Auth::id())
         {
-
-            $type = Auth()->user()->type;//get the type of the user who's trying to log in.
+            $type = Auth()->user()->type;
 
             switch($type){
                 case 'parent':
                     return view('index');
-                    break;
                 case 'tutor':
                     return view('index');
-                    break;
                 case 'admin':
                     return view('index');
-                    break;
                 default:
                     return view('404');
             }
         }
 
+        return view('404');
     }
 }

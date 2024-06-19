@@ -67,32 +67,17 @@ form {
                                 </div>
                                 <div class="card-body pt-0">
                                     <form class="form-horizontal" >
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" id="inputName" placeholder="Name" name="name" value="{{$editchild->name}}" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="number"  min="0" max="8" class="form-control" id="inputEmail3" placeholder="Age" name="age" value="{{$editchild->age}}" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="password" class="form-control" id="inputPassword3" placeholder="Password" name="password" value="{{$editchild->password}}" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="password" class="form-control" id="inputPassword3" placeholder="Confirm Password" name="password_confirmation" value="{{$editchild->password}}" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="image">Select a pic of your child (optional)</label>
-                                            <input type="file" class="form-control" id="childpic" placeholder="select a pic" value="{{$editchild->image}}" name="image">
-                                        </div>
-                                        <div class="form-group mb-0 mt-3 justify-content-end">
-                                            <div>
-                                                <button type="submit" class="btn btn-primary">Sign in</button>
-                                            </div>
-                                        </div>
+
+
+
+
+
+
                                     </form>
                                 </div>
                             </div>
                         </div>
-     
+
     </div>
     <div class="REMOVE-THIS-ELEMENT-IF-YOU-ARE-USING-THIS-PAGE hidden treact-popup fixed inset-0 flex items-center justify-center" style="background-color: rgba(0,0,0,0.3);">
         <div class="max-w-lg p-8 sm:pb-4 bg-white rounded shadow-lg text-center sm:text-left">
@@ -104,7 +89,7 @@ form {
           </h3>
         </div>
       </div>
-                      
+
 				<!-- row closed -->
 			</div>
 			<!-- Container closed -->

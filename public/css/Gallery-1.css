@@ -769,3 +769,114 @@
     font-family: Finger Paint;
     text-align: center;
 }
+#welcome_header{
+    border:1px solid black;
+    width: 100%;
+    margin-top: 0.5rem;
+    background-color: #fa820a;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 1.5cm;
+    border-radius: 10px;
+    z-index: 99999;
+    box-shadow: 1px 3px 2px 0 rgba(0, 0, 0, 0.2),
+    6px 4px 3px 1px rgba(0, 0, 0, 0.3);
+}
+#welcome_header_bu{
+    display: flex;
+    gap: 5px;
+    height: 100%;
+    margin-right: 1rem;
+}
+#welcome_header_bu button {
+    border: none;
+    background-color: transparent;
+    color: black;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bolder;
+    transition: background-color 0.3s ease;
+    height:100%;
+    font-family: Finger Paint;
+}
+#welcome_header_bu button:hover {
+    background-color: #d87008;
+}
+#welcome_header h1{
+    padding-left: 50px;
+}
+#welcome_header_bu .center-group {
+    display: flex;
+    gap: 2px;
+}
+.registration{
+    color: white;
+    background-color:#fa820a ;
+    float: right;
+    border-radius: 7px;
+    margin-right: -40rem;
+    margin-bottom: -6rem;
+    width: 15rem;
+    height: 21rem;
+    padding: 4px;
+    border:1px solid black;
+    box-shadow: 1px 3px 2px 0 rgba(0, 0, 0, 0.2),
+    6px 4px 3px 1px rgba(0, 0, 0, 0.3);
+    padding-top: 5px;
+}
+.registration label{
+    align-content: center;
+}
+.registration input{
+    color: black;
+    border-radius:5px ;
+}
+.registration h8{
+    font-size: 12px;
+    text-align: center;
+}
+#login_bu{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.welome_intro{
+    background-color: rgba(216, 112, 8, 0.7);
+    color: rgb(36, 133, 33);
+    border-radius: 10px;
+    width:50rem;
+    height: 12.5rem;
+    box-shadow: 1px 3px 2px 0 rgba(0, 0, 0, 0.2),
+    6px 4px 3px 1px rgba(0, 0, 0, 0.3);
+    padding-left: 4px;
+    font-family: "Finger Paint";
+}
+.welome_intro img{
+    float: right;
+    width: 170px;
+}
+.carousel {
+    width: 40rem;
+    height: 20rem;
+    overflow: hidden;
+    position: relative;
+    border-radius: 8px;
+    box-shadow: 1px 3px 2px 0 rgba(0, 0, 0, 0.2),
+    6px 4px 3px 1px rgba(0, 0, 0, 0.3);
+}
+.carousel-slide {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+.carousel-slide:first-child {
+    opacity: 1;
+}
+.carousel img{
+    width: 100%;
+    height: 100%;
+
+}

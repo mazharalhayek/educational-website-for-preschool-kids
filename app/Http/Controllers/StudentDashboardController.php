@@ -13,6 +13,15 @@ use App\Models\Parents;
 
 class StudentDashboardController extends Controller
 {
+    public function child_interface($id) 
+    {
+        try {
+            $child = Children::find($id);
+            return view('Children.dashboard', compact('child'));
+        } catch (\Exception $e) {
+            return redirect()->back()->with('alert', $e);
+        }
+    }
     public function getProfile($id)
     {
         $child = Children::find($id);
