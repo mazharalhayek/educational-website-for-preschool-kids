@@ -33,7 +33,8 @@ class BookRequest extends FormRequest
             'description' => ['required', 'string'],
             'price' => ['required', 'integer'],
             'Cover' => ['required', 'file', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
-            'PDF' => ['required', 'file', 'mimes:pdf', 'max: 4096']
+            'PDF' => ['required', 'file', 'mimes:pdf', 'max: 4096'],
+            'rating'=>['required','numeric','max:5','min:0.5']
         ];
     }
 

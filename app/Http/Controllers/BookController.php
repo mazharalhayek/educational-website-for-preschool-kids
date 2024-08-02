@@ -16,10 +16,6 @@ class BookController extends Controller
     {
         $parent_books = Parents::where('id',Auth::id())->with('books')->first();
         $purchased_books = $parent_books->books;
-        // foreach ($parent_books as $item)
-        // {
-        //     $purchased=Book::where('id', $item->book_id)->get();
-        // }
 
         return view('Parent.purchased-books', compact('purchased_books'));
     }

@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Children;
 use App\Traits\Response;
 use App\Models\TutorChild;
+use App\Traits\Files;
 use Illuminate\Support\Facades\Auth;
 
 class ChildrenService
@@ -21,26 +22,17 @@ class ChildrenService
     public function StoreNewStudent($request)
     {
         $val_request = $request->validated();
-
+        $imagepath = null;
         $existing_child = Children::where('name', $val_request)
             ->where('parent_id', auth()->user()->id)
             ->first();
 
-        if ($existing_child) {              //check if it's already added before.
+        if ($existing_child) {
             return $this->errorResponse('child already exists', 401);
         }
 
-        if ($request->image != null) {      //check if the user uploaded an image while
-            //creating a child profile because it's causing some troubles
-            Children::create([
-                'name'        => $val_request['name'],
-                'parent_id'   => Auth::user()->id,
-                'age'         => $val_request['age'],
-                'password'    => $val_request['password'],
-                'image'       => $request['image'],
-            ]);
-
-            return true;
+        if ($request->image != null) {
+            $imagepath = Files::saveImageProfile($request->image);
         }
 
         Children::create([
@@ -48,6 +40,7 @@ class ChildrenService
             'parent_id'   => Auth::user()->id,
             'age'         => $val_request['age'],
             'password'    => $val_request['password'],
+            'image'       => $imagepath
         ]);
 
         return true;
@@ -55,9 +48,19 @@ class ChildrenService
 
     public function UpdateChild($request, $child)
     {
+        $imagepath = null;
+        if($request->image != null) {
+            $imagepath = Files::saveImageProfile($request->image);
+        }
+
         $val_request = $request->validated();
         $updatechild = Children::find($child);
-        $updatechild->update($val_request);
+        $updatechild->update([
+            'name'=>$val_request['name'],
+            'age'=>$val_request['age'],
+            'password'=>$val_request['password'],
+            'image'=>$imagepath
+        ]);
     }
 
     public function DeleteChild($id)
@@ -91,6 +94,5 @@ class ChildrenService
 
     public function AlreadyHired()
     {
-        
     }
 }

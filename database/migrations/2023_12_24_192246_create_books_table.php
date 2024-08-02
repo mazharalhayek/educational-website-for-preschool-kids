@@ -17,9 +17,10 @@ return new class extends Migration
             $table->id();
             $table->string('title')->nullable(false);
             $table->string('author')->nullable(false);
-            $table->string('description')->nullable(false); 
-            $table->integer('price')->nullable(false); 
-            $table->binary('Cover')->nullable(false); 
+            $table->string('description')->nullable(false);
+            $table->integer('price')->nullable(false);
+            $table->integer('rating')->nullable(false);
+            $table->binary('Cover')->nullable(false);
             $table->binary('PDF')->nullable(false);
             $table->timestamps();
         });

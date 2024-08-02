@@ -28,11 +28,7 @@ class Tutor extends Model
         'subject',
     ];
 
-
-    public function tutor_image()
-    {
-        return $this->hasOne(Image::class, 'object_id', 'id');
-    }
+    
 
 
     public function my_students()

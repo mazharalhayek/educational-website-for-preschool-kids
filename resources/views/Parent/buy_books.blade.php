@@ -58,7 +58,7 @@
                         </p>
                         <!-- Button trigger modal -->
                         <div style="display:flex; gap: 1rem;">
-                        <a href="{{ route('Parent.confirmPurchase', $item->id)}}"><button type="submit" class="btn btn-primary">Purchase</button></a>
+                        <a href="{{ route('Parent.confirmPurchase', $item->id)}}"><button type="submit" class="btn btn-primary">Add to cart</button></a>
                         <p style="font-size: 1rem; font-weight: 500;"> ${{$item->price}} </p>
                             </div>
                     </div>

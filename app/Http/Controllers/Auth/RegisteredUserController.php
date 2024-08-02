@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\Cart;
 use App\Models\User;
 use App\Models\Admin;
+use App\Models\Image;
 use App\Models\Tutor;
 use App\Models\Parents;
-use App\Models\Image;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -33,7 +34,7 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request): RedirectResponse|view
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
@@ -66,6 +67,10 @@ class RegisteredUserController extends Controller
                     'email' => $request->email,
                     'password' => Hash::make($request->password),
                     'birth_date'=>$request->birth_date,
+                ]);
+                $cart = Cart::create([
+                    'user_id'=>Auth::id(),
+                    'total'=>0.0
                 ]);
                 break;
             case 'tutor':

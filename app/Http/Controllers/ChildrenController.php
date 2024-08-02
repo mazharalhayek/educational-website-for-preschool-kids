@@ -204,7 +204,7 @@ class ChildrenController extends Controller
     public function buyBooks() //TODO move to Book controller
     {
         $books = Book::all();
-        return view('Parent.buy_books', compact('books'));
+        return view('books_purchase', compact('books'));
     }
 
     /**

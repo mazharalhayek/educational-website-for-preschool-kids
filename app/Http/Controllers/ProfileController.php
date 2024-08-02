@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProfileUpdateRequest;
-use Illuminate\Http\RedirectResponse;
+use App\Models\Admin;
+use App\Models\Tutor;
+use App\Traits\Files;
+use App\Models\Parents;
+use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\View\View;
-use App\Models\Parents;
-use App\Models\Tutor;
-use App\Models\Admin;
+use App\Http\Requests\ProfileUpdateRequest;
 
 class ProfileController extends Controller
 {
@@ -37,13 +38,12 @@ class ProfileController extends Controller
 
         $request->user()->save();
 
-        switch(Auth::user()->type)
-        {
+        switch (Auth::user()->type) {
             case 'parent':
                 $update = Parent::find(Auth::id());
-               $update->name = $request->name;
-               $update->email = $request->email;
-               $update->save();
+                $update->name = $request->name;
+                $update->email = $request->email;
+                $update->save();
                 break;
             case 'tutor':
                 $update = Tutor::find(Auth::id());
@@ -82,5 +82,18 @@ class ProfileController extends Controller
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
+    }
+
+    public function update_pfp(Request $request)
+    {
+        $imagepath = null;
+        if ($request->image != null) {
+            $imagepath = Files::saveImageProfile($request->image);
+            $user  = Auth::user()->user_type;
+            $user->image = $imagepath;
+            $user->save();
+        }
+
+        return redirect()->back();
     }
 }

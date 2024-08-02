@@ -51,7 +51,7 @@
                 <div class="col-xl-4 col-lg-4 col-md-12">
                     <div class="card text-center h-100">
                         <div class="card-body">
-                            <img class="card-img-top" src="{{ asset('images/' . $child->image) }}"
+                            <img class="card-img-top" src="{{ asset($child->image) }}"
                                 onerror="this.onerror=null;this.src='{{ asset('images/kids3.png') }}';">
                             <br>
                             <hr class="line">
@@ -77,14 +77,11 @@
                         </div>
                     </div>
                 </div>
-            @endforeach
-        </div>
-    @endforeach
-    {{-- Edit child info frame --}}
+                 {{-- Edit child info frame --}}
     <div id="editchild" class="modal fade">
         <div class="modal-dialog custom-modal-dialog">
             <div class="modal-content">
-                <form action="{{route('Parent.updatechild',$child->id)}}" method="post">
+                <form action="{{route('Parent.updatechild',$child->id)}}" method="post" enctype="multipart/form-data">
                     @csrf
                     @method('post')
                     <div class="modal-header">
@@ -120,6 +117,10 @@
             </div>
         </div>
     </div>
+            @endforeach
+        </div>
+    @endforeach
+
     <!-- main-content closed -->
 @endsection
 @section('js')

@@ -13,11 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('images', function (Blueprint $table) {
+        Schema::create('book_carts', function (Blueprint $table) {
             $table->id();
-            $table->integer('object_id')->default(null)->nullable(true);
-            $table->binary('image')->default(null)->nullable(true);
-            $table->enum('role',['book','tutor','student','parent'])->default(null)->nullable(true);
             $table->timestamps();
         });
     }
@@ -29,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('images');
+        Schema::dropIfExists('book_carts');
     }
 };

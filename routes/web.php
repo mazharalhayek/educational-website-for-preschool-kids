@@ -66,12 +66,14 @@ Route::middleware('auth')->name('Parent.')->group(function () {
         Route::get('view-wallet', 'viewWallet')->name('viewWallet');
         //Issue Feedback
         Route::get('issue-feedback', 'issueFeedback')->name('issueFeedback');
+
     });
 
 
     //show parent's books
     Route::get('getbooks', [BookController::class, 'show_parent_books'])->name('parentbook');
-
+    //Add book to the cart
+    Route::get('AddToCart',[BookController::class,'AddToCart'])->name('addtocart');
     //view Purchased books
     Route::get('purchased-books', [BookController::class, 'show_parent_books'])->name('purchasedBooks');
 
@@ -105,11 +107,10 @@ Route::middleware('auth')->name('Admin.')->group(function () {
 //Tutor Routes , everything related to the tutor
 Route::middleware('auth')->name('Tutor.')->group(function () {
     Route::get('updatepfp', [TutorController::class, function () {
-        $image = Tutor::find(Auth::id());
-        return view('tutors.update_pfp', compact('image'));
+        return view('tutors.update_pfp');
     }])->name('updateinterface');
     //update the profile pic
-    Route::put('updatepfp', [TutorController::class, 'update_pfp'])->name('updatepfp');
+    Route::put('updatepfp', [ProfileController::class, 'update_pfp'])->name('updatepfp');
     //remove the profile pic
     Route::put('removepfp', [TutorController::class, 'remove_pfp'])->name('removepfp');
     //get tutor's chat with a parent

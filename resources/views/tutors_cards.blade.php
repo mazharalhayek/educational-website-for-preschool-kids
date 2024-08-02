@@ -52,7 +52,7 @@
                                 <h4 class="card-title mb-3">Birth Date: {{\Carbon\Carbon::parse($tutor->birth_date)->format('Y-m-d')}}</h4>
                                 <table style="margin-right:65px">
                                     {{-- <th><a class="btn btn-dark" href="" title="Edit Account" data-placement="bottom" data-toggle="tooltip" ><i class="fas fa-pencil-alt"></i></a></th> --}}
-                                    <th><a class="btn btn-primary" href="{{route('Parent.tutor_info',$tutor->id)}}">Details</a></th>
+                                    <th><a class="btn btn-primary" href="{{route('Parent.tutor_info',$tutor->id)}}">Review</a></th>
                                     {{-- <th><a class="btn btn-dark ripple" href="" title="Remove Account"  id="swal-warning" data-placement="bottom" data-toggle="tooltip" ><i class="fas fa-trash-alt"></i></a></th> --}}
                                 </table>
                             </div>

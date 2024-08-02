@@ -33,14 +33,14 @@
 				<!-- breadcrumb -->
 @endsection
 @section('content')
-<form action="{{route('Tutor.removepfp')}}" method="post">
+<form action="{{route('Tutor.removepfp')}}" method="post" enctype="multipart/form-data">
     @csrf
     @method('PUT')
     <input type="submit" class="btn btn-danger float-left" name="image" value="remove">
 </form>
 <div style="display: flex; flex-direction: column; align-items: center; height: 100vh;">
-    <img src="{{asset('images/'.$image->image)}}" alt="no profile pic" style="max-width: 100%;" onerror="this.onerror=null;this.src='{{ asset('images/teacher1.png') }}';">
-    <form action="{{route('Tutor.updatepfp')}}" style="margin-top: 20px;" method="post">
+    <img src="{{asset(Auth::user()->user_type->image)}}" alt="no profile pic" style="max-width: 50%;" onerror="this.onerror=null;this.src='{{ asset('images/teacher1.png') }}';">
+    <form action="{{route('Tutor.updatepfp')}}" style="margin-top: 20px;" method="post" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <input type="file" class="btn btn-dark" name="image">

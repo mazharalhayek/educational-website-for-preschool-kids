@@ -10,22 +10,44 @@ class RegistrationTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_registration_screen_can_be_rendered(): void
-    {
-        $response = $this->get('/register');
+    protected $parent;
 
-        $response->assertStatus(200);
+
+    public function setUp(): void
+    {
+        parent::setUp();
+        $this->parent = [
+            'name' => 'Test Parent User',
+            'email' => 'testparent@example.com',
+            'password' => '12345678',
+            'password_confirmation' => '12345678',
+            'type' => 'parent',
+            'birth_date' => '1994-12-12',
+        ];
     }
 
-    public function test_new_users_can_register(): void
+    /**
+     * TestCase ID: 1001
+     * Parent enters account information to create an account
+     * @return void
+     */
+    public function test_parent_can_register_account(): void
     {
-        $response = $this->post('/register', [
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-            'password' => 'password',
-            'password_confirmation' => 'password',
-        ]);
+        $response = $this->post('/register', $this->parent);
 
+        $this->assertAuthenticated();
+        $response->assertStatus(200);
+        $response->assertOk();
+    }
+
+    /**
+     * TestCase ID: 1002
+     * Parent can create an account for the student
+     * @return void
+     */
+    public function test_parent_can_create_a_student_account(): void
+    {
+        $response = $this->post('/register', $this->parent);
         $this->assertAuthenticated();
         $response->assertRedirect(RouteServiceProvider::HOME);
     }

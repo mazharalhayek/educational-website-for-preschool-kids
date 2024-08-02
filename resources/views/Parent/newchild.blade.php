@@ -37,7 +37,7 @@ form {
 @section('content')
 				<!-- row opened -->
 
-<form method="POST" action="{{route('Parent.storechild')}}" >
+<form method="POST" action="{{route('Parent.storechild')}}" enctype="multipart/form-data">
                         @csrf
                         <div class="col-lg-6 col-xl-6 col-md-12 col-sm-12">
                             <div class="card  box-shadow-0">

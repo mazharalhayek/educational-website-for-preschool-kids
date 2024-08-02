@@ -22,7 +22,6 @@ class StoreChildrenRequest extends FormRequest
             'name'=>['required','string','min:5','max:20'],
             'age'=>['required','integer','min:2','max:8'],
             'password' => ['required', 'confirmed','min:4'],
-            'image' => ['max:5120']
         ];
     }
 
