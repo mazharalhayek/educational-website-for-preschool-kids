@@ -19,7 +19,7 @@
 								<nav class="nav main-nav-line main-nav-line-chat">
 									<a class="nav-link active" data-toggle="tab" href="">All Chats</a>
 								</nav>
-                                    @foreach ($all_chats as $one_chat)
+                                    
                                         <div class="main-chat-list" id="ChatList">
                                             <div class="media new">
                                                 <div class="main-img-user online">
@@ -27,13 +27,12 @@
                                                 </div>
                                                 <div class="media-body">
                                                     <div class="media-contact-name">
-                                                        <span>{{$one_chat->parent_chat->name}}</span> <span>{{$one_chat->created_at->diffForHumans()}}</span>
+                                                        <span></span> <span></span>
                                                     </div>
-                                                    <p>{{$one_chat->content}}</p>
+                                                    <p></p>
                                                 </div>
                                             </div>
                                         </div>
-                                    @endforeach
 							</div>
 						</div>
 					</div>

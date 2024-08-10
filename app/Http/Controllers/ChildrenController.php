@@ -123,7 +123,6 @@ class ChildrenController extends Controller
      * @param Tutor
      * @return \view
      */
-    //TODO remove where and use the service
     public function tutor_info($id): \Illuminate\View\View|\Illuminate\Http\RedirectResponse
     {
         try {
@@ -156,28 +155,45 @@ class ChildrenController extends Controller
      * [ChildrenServices => none ]
      * @param Tutor
      * @param Request
-     * @return \route
+     * @return \view
      */
-    public function already_hired($id) //TODO move to Tutor controller
+    public function already_hired($id): \Illuminate\View\View  //TODO move to Tutor controller
     {
         $thisuserchild = Children::where('parent_id', Auth::id())->where('id', $id)->with('my_tutors')->first();
         return view('hired_tutors', compact('thisuserchild'));
     }
 
+    /**
+     * Return a view of all available tutors
+     * @param none
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function display_tutors() //TODO move to Tutor controller
     {
         $tutors = Tutor::query()->get();
         return view('tutors_cards', compact('tutors'));
     }
 
+    /**
+     * Return a view for chatting
+     * @param none
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function chat()
     {
         return view('chat');
     }
 
+    /**
+     * Unhire an already hired tutor for a specific child(remove from tutorchild model)
+     * @param \Illuminate\Http\Request $request
+     * @param Children
+     * @return mixed|\Illuminate\Http\RedirectResponse
+     */
     public function unhire_a_tutor(Request $request, $id) //TODO move to Tutor controller
     {
         $tutor = TutorChild::where('tutor_id', $request->tutor_id)->where('child_id', $id)->delete();
+        session()->flash('success','Tutor unhired successfuly');
         return redirect()->back();
     }
 

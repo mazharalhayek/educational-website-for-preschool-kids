@@ -120,7 +120,6 @@
             @endforeach
         </div>
     @endforeach
-
     <!-- main-content closed -->
 @endsection
 @section('js')

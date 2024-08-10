@@ -46,29 +46,34 @@
     <!-- center container -->
     <div class = "container-fluid">
         <div class="row row-cols-1 row-cols-md-4 g-4">
-            @foreach($books as $item)
-            <div class="col">
-                <div class="card h-100" style="min-height: 400px">
-                    <img src="{{ asset('storage/'.$item->Cover) }}" class="card-img-top" alt="..."
-                        style="height: 65%">
-                    <div class="card-body">
-                        <h5 class="card-title">{{$item->title}}</h5>
-                        <h6 class="card-text">{{$item->author}}</h6>
-                        <p class = "card-text" style="min-height: 40%"> {{$item->description}}
-                        </p>
-                        <!-- Button trigger modal -->
-                        <div style="display:flex; gap: 1rem;">
-                        <a href="{{ route('Parent.confirmPurchase', $item->id)}}"><button type="submit" class="btn btn-primary">Add to cart</button></a>
-                        <p style="font-size: 1rem; font-weight: 500;"> ${{$item->price}} </p>
+            @foreach ($books->chunk(4) as $items)
+            <div class="row">
+                @foreach ($items as $item)
+                <div class="col">
+                    <div class="card h-100" style="min-height: 400px">
+                        <img src="{{ asset('storage/' . $item->Cover) }}" class="card-img-top" alt="..."
+                            style="height: 65%">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $item->title }}</h5>
+                            <h6 class="card-text">{{ $item->author }}</h6>
+                            <p class = "card-text" style="min-height: 40%"> {{ $item->description }}
+                            </p>
+                            <!-- Button trigger modal -->
+                            <div style="display:flex; gap: 1rem;">
+                                <a href="{{ route('Parent.confirmPurchase', $item->id) }}"><button type="submit"
+                                        class="btn btn-primary">Add to cart</button></a>
+                                <p style="font-size: 1rem; font-weight: 500;"> ${{ $item->price }} </p>
                             </div>
+                        </div>
                     </div>
                 </div>
+                @endforeach
             </div>
+                
             @endforeach
         </div>
     </div>
-</div>
-
+    </div>
 @endsection
 @section('js')
 @endsection

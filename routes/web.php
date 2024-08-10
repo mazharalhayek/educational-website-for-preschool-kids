@@ -35,7 +35,6 @@ Route::middleware('auth')->group(function () {
 //Parent Routes , everything related to the parent...
 Route::middleware('auth')->name('Parent.')->group(function () {
     Route::controller(ChildrenController::class)->group(function () {
-
         //show all childs
         Route::get('child', 'index')->name('getchilds');
         //add new child
@@ -72,17 +71,21 @@ Route::middleware('auth')->name('Parent.')->group(function () {
 
     //show parent's books
     Route::get('getbooks', [BookController::class, 'show_parent_books'])->name('parentbook');
-    //chech user's cart
+    //check user's cart
     Route::get('getcart', [BookController::class, 'UserCart'])->name('GetCart');
     //Add book to the cart
     Route::get('AddToCart/{bookid}',[BookController::class,'AddToCart'])->name('addtocart');
+    //Remove book from cart
+    Route::get('RemoveFromCart/{bookid}',[BookController::class,'removeFromCart'])->name('removefromcart');
     //view Purchased books
     Route::get('purchased-books', [BookController::class, 'show_parent_books'])->name('purchasedBooks');
+    //Clear cart
+    Route::get('Clear_cart', [BookController::class, 'clearCart'])->name('clearcart');
 
     //Post Issue Feedback
     Route::post('send-feedback/{type}', [ServicesController::class, 'store'])->name('sendFeedback');
     // Buy Book
-    Route::get('confirm-purchase/{book}', [BookController::class, 'confirmPurchase'])->name('confirmPurchase');
+    Route::get('confirm-purchase', [BookController::class, 'confirmPurchase'])->name('confirmPurchase');
 });
 
 //Admin Routes , everything related to the Admin

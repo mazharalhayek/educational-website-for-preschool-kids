@@ -49,7 +49,7 @@ class User extends Authenticatable
     {
         switch(Auth::user()->type){
             case 'parent':
-                return $this->hasOne(Parents::class, 'id');
+                return $this->hasOne(Parents::class, 'id')->with('books');
             case 'tutor':
                 return $this->hasOne(Tutor::class, 'id');
             case 'admin':
@@ -64,6 +64,6 @@ class User extends Authenticatable
      */
     public function user_cart()
     {
-        return $this->hasOne(Cart::class, 'user_id', 'id')->with('cart_books');
+        return $this->hasOne(Cart::class, 'user_id', 'id')->with('cart_books','booksInCart');
     }
 }

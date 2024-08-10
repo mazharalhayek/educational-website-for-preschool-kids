@@ -23,5 +23,8 @@ class BookCart extends Model
         return $this->belongsToMany(Cart::class, 'books', 'book_id', 'cart_id');
     }
 
-    
+    public function books()
+    {
+        return $this->hasMany(Book::class, 'id', 'book_id');
+    }    
 }

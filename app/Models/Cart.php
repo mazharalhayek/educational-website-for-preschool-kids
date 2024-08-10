@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Cart extends Model
 {
@@ -34,4 +35,11 @@ class Cart extends Model
     {
         return $this->belongsToMany(Book::class,'book_carts','cart_id','book_id');
     }
+
+    
+    public function booksInCart(): HasMany
+    {
+        return $this->HasMany(BookCart::class,'cart_id','id');
+    }
+
 }

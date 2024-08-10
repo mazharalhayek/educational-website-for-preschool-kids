@@ -70,6 +70,8 @@ class StudentDashboardController extends Controller
             'grade'=> 10,
             'role'=>$role,
         ]);
+        session()->flash('success','Your progress increased by 10 😃');
+
         return redirect()->back();
     }
 

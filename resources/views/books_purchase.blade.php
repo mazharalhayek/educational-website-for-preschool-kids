@@ -4,8 +4,6 @@
     <link href="{{ URL::asset('assets/plugins/jquery-nice-select/css/nice-select.css') }}" rel="stylesheet" />
     <link href="{{ URL::asset('assets/plugins/morris.js/morris.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link href="{{ URL::asset('assets/plugins/jqvmap/jqvmap.min.css') }}" rel="stylesheet">
-
 @endsection
 @section('page-header')
     <!-- breadcrumb -->
@@ -58,43 +56,37 @@
     <!-- breadcrumb -->
 @endsection
 @section('content')
-    <!-- row -->  
+    <!-- row -->
     @foreach ($books->chunk(4) as $chunk)
-        <div class="row row-sm">
+        <div class="row">
             @foreach ($chunk as $item)
-                    <div class="col-xl-9 col-lg-9 col-md-12">
-                        <div class="col-md-6 col-lg-6 col-xl-4  col-sm-6">
-                            <div class="col">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="pro-img-box">
-                                            <img class="w-100" src="{{ asset('storage/' . $item->Cover) }}"
-                                                alt="product-image">
-                                            <a href="{{route('Parent.addtocart',$item->id)}}" class="adtocart">
-                                                <i class="las la-shopping-cart "></i>
-                                            </a>
-                                        </div>
-                                        <div class="text-center pt-3">
-                                            <h3 class="h6 mb-2 mt-4 font-weight-bold text-uppercase">{{ $item->title }}
-                                            </h3>
-                                            <h5 class="h6 mb-2 mt-4 text-uppercase">{{ $item->author }}</h5><br>
-                                            <h7 class="h6 mb-2 mt-4 text-uppercase">{{ $item->description }}</h7><br>
-                                            <span class="tx-15 ml-auto">
-                                                @for ($i = 0; $i < floor($item->rating); $i++)
-                                                    <i class="ion ion-md-star text-warning"></i>
-                                                @endfor                                               
-                                                @for ($i = 0; $i < 5 - floor($item->rating); $i++)
-                                                    <i class="ion ion-md-star-outline text-warning"></i>
-                                                @endfor
-                                            </span>
-                                            <h4 class="h5 mb-0 mt-2 text-center font-weight-bold text-danger">
-                                                ${{ $item->price }}</h4>
-                                        </div>
-                                    </div>
-                                </div>
+                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="pro-img-box">
+                                <img class="w-100" src="{{ asset('storage/' . $item->Cover) }}" alt="product-image">
+                                <a href="{{ route('Parent.addtocart', $item->id) }}" class="adtocart">
+                                    <i class="las la-shopping-cart "></i>
+                                </a>
+                            </div>
+                            <div class="text-center pt-3">
+                                <h3 class="h6 mb-2 mt-4 font-weight-bold text-uppercase">{{ $item->title }}</h3>
+                                <h5 class="h6 mb-2 mt-4 text-uppercase">{{ $item->author }}</h5><br>
+                                <h7 class="h6 mb-2 mt-4 text-uppercase">{{ $item->description }}</h7><br>
+                                <span class="tx-15 ml-auto">
+                                    @for ($i = 0; $i < floor($item->rating); $i++)
+                                        <i class="ion ion-md-star text-warning"></i>
+                                    @endfor
+                                    @for ($i = 0; $i < 5 - floor($item->rating); $i++)
+                                        <i class="ion ion-md-star-outline text-warning"></i>
+                                    @endfor
+                                </span>
+                                <h4 class="h5 mb-0 mt-2 text-center font-weight-bold text-danger">
+                                    ${{ $item->price }}</h4>
                             </div>
                         </div>
-                    </div>        
+                    </div>
+                </div>
             @endforeach
         </div>
     @endforeach

@@ -60,6 +60,7 @@ class ProfileController extends Controller
             default:
                 return view('404');
         }
+        session()->flash('success','Profile updated successfuly');
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
 
@@ -92,6 +93,7 @@ class ProfileController extends Controller
             $user  = Auth::user()->user_type;
             $user->image = $imagepath;
             $user->save();
+            session()->flash('success','Profile picture updated successfuly');
         }
 
         return redirect()->back();
