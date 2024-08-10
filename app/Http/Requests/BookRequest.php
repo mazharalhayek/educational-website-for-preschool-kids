@@ -34,15 +34,12 @@ class BookRequest extends FormRequest
             'price' => ['required', 'integer'],
             'Cover' => ['required', 'file', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
             'PDF' => ['required', 'file', 'mimes:pdf', 'max: 4096'],
-            'rating'=>['required','numeric','max:5','min:0.5']
+            'rating'=>['required','numeric','max:5','min:0']
         ];
     }
 
     protected function failedValidation(Validator $validator)
     {
-        throw new HttpResponseException(response()->json([
-            'message' => 'Validation Error',
-            'errors' => $validator->errors(),
-        ], 422));
+        return redirect()->back()->withErrors($validator)->withInput();
     }
 }

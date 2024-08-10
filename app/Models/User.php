@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Notifications\Notifiable;
@@ -54,5 +55,15 @@ class User extends Authenticatable
             case 'admin':
                 return $this->hasOne(Admin::class, 'id');
         }
+    }
+
+    /**
+     * Get the cart associated with the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function user_cart()
+    {
+        return $this->hasOne(Cart::class, 'user_id', 'id')->with('cart_books');
     }
 }

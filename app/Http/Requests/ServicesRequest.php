@@ -32,9 +32,6 @@ class ServicesRequest extends FormRequest
     }
     protected function failedValidation(Validator $validator)
     {
-        throw new HttpResponseException(response()->json([
-            'message' => 'Validation Error',
-            'errors'=> $validator->errors(),   
-        ],422));
+        return redirect()->back()->withErrors($validator)->withInput();
     }
 }

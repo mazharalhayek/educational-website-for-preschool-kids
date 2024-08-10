@@ -18,7 +18,7 @@ class BookCart extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function book_cart(): BelongsToMany
+    public function book_cart()
     {
         return $this->belongsToMany(Cart::class, 'books', 'book_id', 'cart_id');
     }

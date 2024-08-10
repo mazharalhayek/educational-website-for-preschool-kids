@@ -4,8 +4,6 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Http\Exceptions\HttpResponseException;
-use Illuminate\Validation\Rules;
 
 class StoreChildrenRequest extends FormRequest
 {
@@ -19,7 +17,7 @@ class StoreChildrenRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=>['required','string','min:5','max:20'],
+            'name'=>['required','string','min:5','max:20','unique:childrens,name'],
             'age'=>['required','integer','min:2','max:8'],
             'password' => ['required', 'confirmed','min:4'],
         ];
@@ -28,9 +26,6 @@ class StoreChildrenRequest extends FormRequest
     //if there is an error with the validation display the error as a Json response.
     protected function failedValidation(Validator $validator)
     {
-        throw new HttpResponseException(response()->json([
-            'message' => 'Validation Error',
-            'errors' => $validator->errors(),
-        ], 422));
+        return redirect()->back()->withErrors($validator)->withInput();
     }
 }

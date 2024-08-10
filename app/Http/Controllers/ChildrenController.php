@@ -64,12 +64,8 @@ class ChildrenController extends Controller
      */
     public function store(StoreChildrenRequest $request): \Illuminate\View\View|\Illuminate\Http\RedirectResponse
     {
-        try {
-            $this->ChildrenServices->StoreNewStudent($request);
-            return redirect(route('Parent.getchilds'));
-        } catch (\Exception $e) {
-            return redirect()->back()->with('alert', $e);
-        }
+        $this->ChildrenServices->StoreNewStudent($request);
+        return redirect(route('Parent.getchilds'));
     }
 
     /**

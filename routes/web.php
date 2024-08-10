@@ -72,8 +72,10 @@ Route::middleware('auth')->name('Parent.')->group(function () {
 
     //show parent's books
     Route::get('getbooks', [BookController::class, 'show_parent_books'])->name('parentbook');
+    //chech user's cart
+    Route::get('getcart', [BookController::class, 'UserCart'])->name('GetCart');
     //Add book to the cart
-    Route::get('AddToCart',[BookController::class,'AddToCart'])->name('addtocart');
+    Route::get('AddToCart/{bookid}',[BookController::class,'AddToCart'])->name('addtocart');
     //view Purchased books
     Route::get('purchased-books', [BookController::class, 'show_parent_books'])->name('purchasedBooks');
 

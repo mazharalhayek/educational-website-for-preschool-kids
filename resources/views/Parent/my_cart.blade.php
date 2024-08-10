@@ -8,12 +8,13 @@
 
 @endsection
 @section('page-header')
+
     <!-- breadcrumb -->
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
                 <h4 class="content-title mb-0 my-auto">Books</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
-                    Add to cart</span>
+                    My cart</span>
             </div>
         </div>
         <div class="d-flex my-xl-auto right-content">
@@ -58,8 +59,8 @@
     <!-- breadcrumb -->
 @endsection
 @section('content')
-    <!-- row -->  
-    @foreach ($books->chunk(4) as $chunk)
+    <!-- row -->
+    @foreach (Auth::user()->user_cart->cart_books->chunk(4) as $chunk)
         <div class="row row-sm">
             @foreach ($chunk as $item)
                     <div class="col-xl-9 col-lg-9 col-md-12">
@@ -70,8 +71,8 @@
                                         <div class="pro-img-box">
                                             <img class="w-100" src="{{ asset('storage/' . $item->Cover) }}"
                                                 alt="product-image">
-                                            <a href="{{route('Parent.addtocart',$item->id)}}" class="adtocart">
-                                                <i class="las la-shopping-cart "></i>
+                                            <a href="" class="adtocart" title="Remove from cart">
+                                                <i class="las la-trash "></i>
                                             </a>
                                         </div>
                                         <div class="text-center pt-3">
@@ -82,7 +83,7 @@
                                             <span class="tx-15 ml-auto">
                                                 @for ($i = 0; $i < floor($item->rating); $i++)
                                                     <i class="ion ion-md-star text-warning"></i>
-                                                @endfor                                               
+                                                @endfor
                                                 @for ($i = 0; $i < 5 - floor($item->rating); $i++)
                                                     <i class="ion ion-md-star-outline text-warning"></i>
                                                 @endfor
@@ -94,7 +95,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>        
+                    </div>
             @endforeach
         </div>
     @endforeach

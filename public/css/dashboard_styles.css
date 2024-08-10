@@ -155,3 +155,16 @@ div.card{
   top: 450px;
   left: 450px;
 }
+.messages{
+    position: fixed;
+    top: 10;
+    left: 0;
+    width: max-content;
+    z-index: 10000;
+}
+.errors{
+    width: max-content;
+}
+#success{
+    width: max-content;
+}
