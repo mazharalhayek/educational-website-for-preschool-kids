@@ -24,6 +24,7 @@ class User extends Authenticatable
         'type',
         'email',
         'password',
+        'last_login_at'
     ];
 
     /**
@@ -45,11 +46,15 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    protected $append = [
+        'allMyMessages',
+    ];
+
     public function user_type()
     {
         switch(Auth::user()->type){
             case 'parent':
-                return $this->hasOne(Parents::class, 'id')->with('books');
+                return $this->hasOne(Parents::class, 'id')->with('books','mychidlren');
             case 'tutor':
                 return $this->hasOne(Tutor::class, 'id');
             case 'admin':
@@ -65,5 +70,22 @@ class User extends Authenticatable
     public function user_cart()
     {
         return $this->hasOne(Cart::class, 'user_id', 'id')->with('cart_books','booksInCart');
+    }
+
+    
+    public function allMyMessages($id)
+    {
+        $sentmessages = Message::where('senderId', $this->id)
+        ->Where('receiverId', $id)
+        ->get()->toArray();
+        $receivedmessages = Message::where('senderId', $id)
+        ->Where('receiverId', $this->id)
+        ->get()->toArray();
+        $allmessages = array_merge($sentmessages,$receivedmessages);
+
+        usort($allmessages, function ($a, $b) {
+            return $a['created_at'] <=> $b['created_at']; 
+        });
+        return $allmessages;
     }
 }

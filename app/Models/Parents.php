@@ -4,14 +4,8 @@ namespace App\Models;
 
 
 use App\Models\Book;
-use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-
-
 
 class Parents extends Model
 {
@@ -29,7 +23,7 @@ class Parents extends Model
 
     public function mychidlren()
     {
-        return $this->hasMany(Children::class);
+        return $this->hasMany(Children::class,'parent_id','id')->with('my_tutors');
     }
 
     public function books()

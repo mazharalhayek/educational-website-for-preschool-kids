@@ -179,9 +179,15 @@ class ChildrenController extends Controller
      * @param none
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function chat()
-    {
-        return view('chat');
+    public function chat($id,$tid=null)
+    {   
+        $child = Auth::user()->user_type->mychidlren->where('id', $id)->first();
+        if ($tid != null) {
+           $chat = Auth::user()->allMyMessages($tid);
+           $tu = Tutor::where('id',$tid)->first();
+            return view('chat',compact('child','chat','tu'));
+        }
+        return view('chat',compact('child'));
     }
 
     /**

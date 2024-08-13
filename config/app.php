@@ -185,6 +185,7 @@ return [
         /*
          * Package Service Providers...
          */
+        Askedio\Laravel5ProfanityFilter\Providers\ProfanityFilterServiceProvider::class,
 
         /*
          * Application Service Providers...

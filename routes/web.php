@@ -4,6 +4,7 @@ use App\Models\Tutor;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\TutorController;
@@ -46,7 +47,7 @@ Route::middleware('auth')->name('Parent.')->group(function () {
         Route::get('childedi/{id}', 'edit')->name('editchild');
         Route::post('childedi/{id}', 'update')->name('updatechild');
         //chating
-        Route::get('childch', 'chat')->name('chat');
+        Route::get('childch/{id}/{tid?}', 'chat')->name('chat');
         //display all available tutors
         Route::get('alltutors', 'display_tutors')->name('display_tutors');
         //display a specific tutor info
@@ -136,6 +137,10 @@ Route::middleware('auth')->group(function () {
     Route::post('incrementProgress/{child_id}/{role}', [StudentDashboardController::class, 'increase_progress'])->name('incrementProgress');
     Route::get('student_logout', [ChildrenController::class, 'index'])->name('student_logout');
     Route::get('child/{id}', [StudentDashboardController::class,'child_interface'])->name('child_interface');
+    //Send message
+    Route::post('sendmessage/{id}',[ChatController::class,'sendMessage'])->name('sendMessage');
+    //Get chat
+    Route::get('getchat/{id}',[ChatController::class,'getChat'])->name('getMessages');
 });
 
 Route::get('under_construction', function () {

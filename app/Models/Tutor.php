@@ -26,6 +26,7 @@ class Tutor extends Model
         'salary',
         'qualifications',
         'subject',
+        'image'
     ];
 
     
