@@ -94,13 +94,15 @@ Route::middleware('auth')->name('Admin.')->group(function () {
     //table of users acounts.
     Route::get('usersacc/{type}', [AdminController::class, 'users_accounts'])->name('usersaccounts');
     //display user feedback
-    Route::get('display-feedback', [AdminController::class, 'displayFeedback'])->name('displayFeedback');
+    Route::get('display-feedback/{type}', [AdminController::class, 'displayFeedback'])->name('displayFeedback');
     //delete user feedback
     Route::delete('delete-feedback/{id}', [ServicesController::class, 'destroy'])->name('destroyFeedback');
     //add Book page
     Route::get('add-Book', [AdminController::class, 'addBook'])->name('addBook');
     // add book post
     Route::post('add-book-post', [BookController::class, 'store'])->name('postBook');
+    //ban a user
+    Route::get('Ban/{id}',[AdminController::class,'BanUser'])->name('userBan');
 });
 
 
@@ -120,7 +122,11 @@ Route::middleware('auth')->name('Tutor.')->group(function () {
     //remove the profile pic
     Route::put('removepfp', [TutorController::class, 'remove_pfp'])->name('removepfp');
     //get tutor's chat with a parent
-    Route::get('chating', [TutorController::class, 'chating'])->name('chating');
+    Route::get('chating/{id}/{pid?}', [TutorController::class, 'chating'])->name('chating');
+    //delete a message
+    Route::get('demessage/{id}',[ChatController::class,'del_message'])->name('deleteMessage');
+    //Edit a message
+    Route::post('edmessage/{id}',[ChatController::class,'edi_message'])->name('editMessage');
     //get all children that the tutor teaches
     Route::get('get_students', [TutorController::class, 'get_students'])->name('get_students');
     //check a specific child's progress
@@ -141,6 +147,12 @@ Route::middleware('auth')->group(function () {
     Route::post('sendmessage/{id}',[ChatController::class,'sendMessage'])->name('sendMessage');
     //Get chat
     Route::get('getchat/{id}',[ChatController::class,'getChat'])->name('getMessages');
+    //Report message
+    Route::get('reportmes/{id}',[ChatController::class,'reportMessage'])->name('reportMessage');
+    //Clear chat
+    Route::get('clearch/{id}',[ChatController::class,'ClearChat'])->name('deleteAllMessages');
+    //Unreport a message
+    Route::get('unreport/{id}',[ChatController::class,'unreport'])->name('UnreportMessage');
 });
 
 Route::get('under_construction', function () {

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('password');
             $table->datetime('birth_date');
             $table->binary('image')->nullable(true)->default(null);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

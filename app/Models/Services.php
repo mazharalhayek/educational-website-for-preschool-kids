@@ -20,7 +20,7 @@ class Services extends Model
 
     public function service()
     {
-        return $this->hasMany(User::class, 'id', 'sender_id');
+        return $this->hasMany(User::class, 'id', 'sender_id')->with('user_type');
     }
 
 }

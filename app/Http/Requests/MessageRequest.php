@@ -34,6 +34,12 @@ class MessageRequest extends FormRequest
 
     protected function failedValidation(Validator $validator)
     {
+        $customMessages = [
+            'content.profanity' => 'You have been added to the blacklist due to sending bad words!!',
+        ];
+    
+        // Merge the custom messages with the existing messages
+        $validator->messages()->merge($customMessages);
         return redirect()->back()->withErrors($validator)->withInput();
     }
 }

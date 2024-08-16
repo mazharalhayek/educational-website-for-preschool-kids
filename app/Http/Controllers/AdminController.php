@@ -2,117 +2,83 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\Tutor;
+use App\Models\Message;
 use App\Models\Parents;
 use App\Models\Children;
 use App\Models\Services;
-use App\Models\Tutor;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
-    
+    /**
+     * return the requested view
+     * @param mixed $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function index($id)
     {
-        if(view()->exists($id)){
+        if (view()->exists($id)) {
             return view($id);
-        }
-        else
-        {
+        } else {
             return view('404');
         }
     }
 
-    public function users_accounts($type){
-
-        switch($type){
+    /**
+     * Get all users of a specific type and return a table view
+     * @param mixed $type
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function users_accounts($type)
+    {
+        switch ($type) {
             case 'parent':
                 $accounts = Parents::query()->get();
-                return view('admin.parentslist',compact('accounts'));
-                break;
-
+                return view('admin.parentslist', compact('accounts'));
             case 'children':
                 $accounts = Children::query()->with('my_parent')->get();
-                return view('admin.childrenlist',compact('accounts'));
-                break;
+                return view('admin.childrenlist', compact('accounts'));
             case 'tutor':
                 $accounts = Tutor::query()->get();
-                return view('admin.tutorslist',compact('accounts'));
-                break;
+                return view('admin.tutorslist', compact('accounts'));
             default:
                 return view('404');
         }
-
     }
 
-    public function displayFeedback(){
+    /**
+     * Get all feedbacks sent to the authenticated admin
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function displayFeedback($type)
+    {
+        if ($type == 'feedback') {
+            $services = Services::where('type', $type)
+                ->where('responder_id', Auth::id())
+                ->with('service')
+                ->paginate(5);
+            return view('Admin.display-feedback', compact('services', 'type'));
+        }
+        $services = Message::getReportedMessages();
 
-        $feedback = Services::where('type', 'feedback')->with('service')->get();
-        return view('Admin.display-feedback', compact('feedback'));
+        return view('Admin.display-feedback', compact('services', 'type'));
     }
 
-    public function addBook(){
+    /**
+     * Return a view for adding a book record
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function addBook()
+    {
         return view('Admin.add-book');
     }
 
-
-    public function create()
+    public function BanUser($id)
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $user = User::where('id',$id)->first()->delete();
+        return redirect()->back();
     }
 }

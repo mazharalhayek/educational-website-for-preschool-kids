@@ -63,9 +63,7 @@
 											</tr>
 										</thead>
 										<tbody>
-                                            @foreach ($accounts as $account)
-                                                
-                                           
+                                            @foreach ($accounts as $account)                                                                                           
 											<tr>
 												<td>
 													<img alt="avatar" class="rounded-circle avatar-md mr-2" src="{{URL::asset('assets/img/faces/1.jpg')}}">

@@ -15,12 +15,8 @@ return new class extends Migration
     {
         Schema::create('parent_books', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('parent_id');
-            $table->unsignedBigInteger('book_id');
-            $table->timestamps();
-            // Define foreign key constraints
-            $table->foreign('parent_id')->references('id')->on('parents')->onDelete('cascade');
-            $table->foreign('book_id')->references('id')->on('books')->onDelete('cascade');
+            $table->foreignId('parent_id')->constrained('parents')->cascadeOnDelete();
+            $table->foreignId('book_id')->constrained('books')->cascadeOnDelete();            
         });
     }
 

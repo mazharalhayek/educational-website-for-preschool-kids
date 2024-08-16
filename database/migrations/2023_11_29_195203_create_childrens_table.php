@@ -12,8 +12,7 @@ return new class extends Migration
         Schema::create('childrens', function (Blueprint $table) {
             $table->id();
             $table->string("name");
-            $table->unsignedBigInteger('parent_id');
-            $table->foreign('parent_id')->references('id')->on('parents');
+            $table->foreignId('parent_id')->constrained('parents')->cascadeOnDelete()->cascadeOnUpdate();  
             $table->Integer("age");
             $table->string("password");
             $table->binary('image')->nullable(true)->default(null);

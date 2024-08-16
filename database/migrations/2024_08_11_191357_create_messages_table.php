@@ -17,9 +17,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('senderId')->constrained('users')->cascadeOnDelete();
             $table->foreignId('receiverId')->constrained('users')->cascadeOnDelete();
-            $table->foreignId('childId')->constrained('childrens')->nullable()->cascadeOnDelete();
+            $table->foreignId('childId')->constrained('childrens')->nullable(true)->default(null)->cascadeOnDelete();
             $table->string('content')->nullable(false);
-            $table->boolean('readStatus')->default(false);
+            $table->boolean('isReported')->default(false);
             $table->timestamps();
         });
     }

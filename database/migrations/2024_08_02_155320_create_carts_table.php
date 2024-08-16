@@ -15,8 +15,7 @@ return new class extends Migration
     {
         Schema::create('carts', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('parents');
+            $table->foreignId('user_id')->constrained('parents')->cascadeOnDelete();      
             $table->float('total');
             $table->timestamps();
         });

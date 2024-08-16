@@ -20,6 +20,7 @@ class Kernel extends ConsoleKernel
 
     protected $commands = [
         \App\Console\Commands\CreateService::class,
+        \App\Console\Commands\clearAllCache::class,
     ];
 
     /**

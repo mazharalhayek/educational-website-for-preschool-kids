@@ -8,11 +8,12 @@ use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -50,13 +51,21 @@ class User extends Authenticatable
         'allMyMessages',
     ];
 
-    public function user_type()
+    public function user_type($id=null,$type=null)
     {
+        if($id != null){
+            switch($type){
+                case 'parent':
+                    return Parents::where('id',$id)->first();
+                case 'tutor':
+                    return Tutor::where('id',$id)->first();                
+            }
+        }
         switch(Auth::user()->type){
             case 'parent':
                 return $this->hasOne(Parents::class, 'id')->with('books','mychidlren');
             case 'tutor':
-                return $this->hasOne(Tutor::class, 'id');
+                return $this->hasOne(Tutor::class, 'id')->with('my_students');
             case 'admin':
                 return $this->hasOne(Admin::class, 'id');
         }

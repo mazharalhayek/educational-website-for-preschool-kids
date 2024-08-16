@@ -29,11 +29,11 @@ class Tutor extends Model
         'image'
     ];
 
-    
+
 
 
     public function my_students()
     {
-        return $this->belongsToMany(Children::class, 'tutor_children', 'tutor_id', 'child_id');
+        return $this->belongsToMany(Children::class, 'tutor_children', 'tutor_id', 'child_id')->with('my_parent');
     }
 }

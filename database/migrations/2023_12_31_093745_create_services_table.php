@@ -5,6 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
+    
     /**
      * Run the migrations.
      *
@@ -15,14 +16,10 @@ return new class extends Migration {
         Schema::create('services', function (Blueprint $table) {
 
             $table->id();
-            $table->unsignedBigInteger('sender_id');
-
-          
+            $table->unsignedBigInteger('sender_id');          
             $table->foreignId('responder_id')->constrained('admins'); 
             $table->enum('type', ['feedback', 'report']);
-            $table->string('content')->nullable(false); 
-            
-
+            $table->string('content')->nullable(false);             
             $table->timestamps();
         });
     }
