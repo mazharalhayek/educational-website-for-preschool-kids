@@ -12,15 +12,16 @@ class ParentBook extends Model
     use HasFactory;
 
     protected $fillable =
-    [
-      'book_id',
-      'parent_id',
-    ];
+        [
+            'book_id',
+            'parent_id',
+            'review',
+        ];
 
 
     public function parents()
     {
-        return $this->belongsToMany(Parents::class, 'parent_books','parent_id','id');
+        return $this->belongsToMany(Parents::class, 'parent_books', 'parent_id', 'id');
     }
 
     // /**
@@ -35,6 +36,6 @@ class ParentBook extends Model
 
     public function books()
     {
-      return $this->belongsToMany(Book::class,'parent_books');
+        return $this->belongsToMany(Book::class, 'parent_books');
     }
 }

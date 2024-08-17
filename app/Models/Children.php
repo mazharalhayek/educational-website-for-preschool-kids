@@ -10,13 +10,13 @@ class Children extends Model
     use HasFactory;
 
     protected $fillable =
-    [
-        'name',
-        'age',
-        'parent_id',
-        'password',
-        'image',
-    ];
+        [
+            'name',
+            'age',
+            'parent_id',
+            'password',
+            'image',
+        ];
 
 
     public function my_parent()
@@ -27,7 +27,8 @@ class Children extends Model
 
     public function my_tutors()
     {
-        return $this->belongsToMany(Tutor::class, 'tutor_children', 'child_id', 'tutor_id');
+        return $this->belongsToMany(Tutor::class, 'tutor_children', 'child_id', 'tutor_id')
+            ->with('reviews');
     }
 
 

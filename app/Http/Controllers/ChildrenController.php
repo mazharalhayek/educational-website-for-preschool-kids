@@ -17,6 +17,7 @@ use App\Http\Requests\StoreChildrenRequest;
 class ChildrenController extends Controller
 {
     use Response;
+
     protected $ChildrenServices;
 
     /**
@@ -159,8 +160,24 @@ class ChildrenController extends Controller
      */
     public function already_hired($id): \Illuminate\View\View  //TODO move to Tutor controller
     {
-        $thisuserchild = Children::where('parent_id', Auth::id())->where('id', $id)->with('my_tutors')->first();
-        return view('hired_tutors', compact('thisuserchild'));
+        $thisuserchild = Children::where('parent_id', Auth::id())->where('id', $id)
+            ->with('my_tutors')
+            ->first();
+        $all_tutors = Tutor::all()->count();
+        $reviews = [];
+        foreach ($thisuserchild->my_tutors as $tutor) {
+            $votes = TutorChild::where('tutor_id', $tutor->id)
+                ->whereNotNull('review')
+                ->count();
+            $reviews[] = [
+                'tutor_id' => $tutor->id,
+                'votes' => $votes,
+                'percentage' => ($votes * $all_tutors) * 100,
+            ];
+        }
+        $reviews = collect($reviews);
+
+        return view('hired_tutors', compact('thisuserchild', 'reviews'));
     }
 
     /**
@@ -179,15 +196,15 @@ class ChildrenController extends Controller
      * @param none
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function chat($id,$tid=null)
-    {   
+    public function chat($id, $tid = null)
+    {
         $child = Auth::user()->user_type->mychidlren->where('id', $id)->first();
         if ($tid != null) {
-           $chat = Auth::user()->allMyMessages($tid);
-           $tu = Tutor::where('id',$tid)->first();
-            return view('chat',compact('child','chat','tu'));
+            $chat = Auth::user()->allMyMessages($tid);
+            $tu = Tutor::where('id', $tid)->first();
+            return view('chat', compact('child', 'chat', 'tu'));
         }
-        return view('chat',compact('child'));
+        return view('chat', compact('child'));
     }
 
     /**
@@ -199,7 +216,7 @@ class ChildrenController extends Controller
     public function unhire_a_tutor(Request $request, $id) //TODO move to Tutor controller
     {
         $tutor = TutorChild::where('tutor_id', $request->tutor_id)->where('child_id', $id)->delete();
-        session()->flash('success','Tutor unhired successfuly');
+        session()->flash('success', 'Tutor unhired successfuly');
         return redirect()->back();
     }
 
@@ -245,5 +262,31 @@ class ChildrenController extends Controller
     public function issueFeedback(): \Illuminate\View\View
     {
         return view('Parent.issue_feedback');
+    }
+
+    /**
+     * Give a specific hired tutor a review
+     * @param Request $request
+     * @param $id
+     * @param $cid
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function tutorReview(Request $request, $id, $cid)
+    {
+        $request->validate([
+            'review' => 'integer|min:0|max:5',
+        ]);
+
+        $tutor = TutorChild::where('tutor_id', $id)->where('child_id', $cid)->first();
+
+        if ($tutor->review == null) {
+            $tutor->review = $request->review;
+            $tutor->save();
+
+            session()->flash('success', 'Review sent successfully');
+            return redirect()->back();
+        }
+
+        return redirect()->back()->withErrors('Tutor already received a review before');
     }
 }

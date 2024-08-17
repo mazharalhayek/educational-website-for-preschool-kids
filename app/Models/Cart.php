@@ -25,7 +25,7 @@ class Cart extends Model
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
-    
+
     /**
      * Get the books that belongs to the Cart
      *
@@ -36,7 +36,7 @@ class Cart extends Model
         return $this->belongsToMany(Book::class,'book_carts','cart_id','book_id');
     }
 
-    
+
     public function booksInCart(): HasMany
     {
         return $this->HasMany(BookCart::class,'cart_id','id');

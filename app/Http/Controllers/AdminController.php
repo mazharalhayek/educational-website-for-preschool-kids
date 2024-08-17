@@ -76,9 +76,14 @@ class AdminController extends Controller
         return view('Admin.add-book');
     }
 
+    /**
+     * Restict a user from using the website
+     * @param mixed $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function BanUser($id)
     {
-        $user = User::where('id',$id)->first()->delete();
+        $user = User::where('id', $id)->first()->delete();
         return redirect()->back();
     }
 }

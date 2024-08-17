@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Message extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'senderId',
         'receiverId',
@@ -19,7 +20,7 @@ class Message extends Model
 
     public static function getReportedMessages()
     {
-        $reported = Message::where('isReported', true)->with('sender','reciever')
+        $reported = Message::where('isReported', true)->with('sender', 'reciever')
             ->paginate(5);
         return $reported;
     }
@@ -33,4 +34,5 @@ class Message extends Model
     {
         return $this->belongsTo(User::class, 'receiverId', 'id')->with('user_type');
     }
+
 }

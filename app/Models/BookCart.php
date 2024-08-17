@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class BookCart extends Model
 {
     use HasFactory;
-    protected $fillable=[
+
+    protected $fillable = [
         'cart_id',
         'book_id',
     ];
@@ -26,5 +27,5 @@ class BookCart extends Model
     public function books()
     {
         return $this->hasMany(Book::class, 'id', 'book_id');
-    }    
+    }
 }

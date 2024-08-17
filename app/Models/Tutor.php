@@ -11,29 +11,30 @@ use App\Models\Image;
 use Laravel\Sanctum\HasApiTokens;
 
 
-
 class Tutor extends Model
 {
     use HasFactory;
 
     protected $fillable =
-    [
-        'id',
-        'name',
-        'email',
-        'password',
-        'birth_date',
-        'salary',
-        'qualifications',
-        'subject',
-        'image'
-    ];
-
-
-
+        [
+            'id',
+            'name',
+            'email',
+            'password',
+            'birth_date',
+            'salary',
+            'qualifications',
+            'subject',
+            'image'
+        ];
 
     public function my_students()
     {
         return $this->belongsToMany(Children::class, 'tutor_children', 'tutor_id', 'child_id')->with('my_parent');
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(TutorChild::class, 'tutor_id', 'id');
     }
 }

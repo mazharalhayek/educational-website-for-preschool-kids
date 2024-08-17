@@ -15,11 +15,11 @@ use App\Http\Controllers\StudentDashboardController;
 
 
 Route::get('/', function () {
-    return view('homepage');
+    $tutors = Tutor::inRandomOrder()->take(3)->get();
+    return view('homepage', compact('tutors'));
 });
 
 Route::get('/home', [HomeController::class, 'index']); //this Route will take each user  to the required page.
-
 
 
 Route::get('/dashboard', function () {
@@ -66,6 +66,8 @@ Route::middleware('auth')->name('Parent.')->group(function () {
         Route::get('view-wallet', 'viewWallet')->name('viewWallet');
         //Issue Feedback
         Route::get('issue-feedback', 'issueFeedback')->name('issueFeedback');
+        //Give a parent a review
+        Route::post('ReviewTutor/{id}/{cid}', 'tutorReview')->name('TutorReview');
 
     });
 
@@ -75,9 +77,9 @@ Route::middleware('auth')->name('Parent.')->group(function () {
     //check user's cart
     Route::get('getcart', [BookController::class, 'UserCart'])->name('GetCart');
     //Add book to the cart
-    Route::get('AddToCart/{bookid}',[BookController::class,'AddToCart'])->name('addtocart');
+    Route::get('AddToCart/{bookid}', [BookController::class, 'AddToCart'])->name('addtocart');
     //Remove book from cart
-    Route::get('RemoveFromCart/{bookid}',[BookController::class,'removeFromCart'])->name('removefromcart');
+    Route::get('RemoveFromCart/{bookid}', [BookController::class, 'removeFromCart'])->name('removefromcart');
     //view Purchased books
     Route::get('purchased-books', [BookController::class, 'show_parent_books'])->name('purchasedBooks');
     //Clear cart
@@ -87,6 +89,8 @@ Route::middleware('auth')->name('Parent.')->group(function () {
     Route::post('send-feedback/{type}', [ServicesController::class, 'store'])->name('sendFeedback');
     // Buy Book
     Route::get('confirm-purchase', [BookController::class, 'confirmPurchase'])->name('confirmPurchase');
+    //give a book a review
+    Route::post('Review/{id}', [BookController::class, 'Review'])->name('review');
 });
 
 //Admin Routes , everything related to the Admin
@@ -102,7 +106,7 @@ Route::middleware('auth')->name('Admin.')->group(function () {
     // add book post
     Route::post('add-book-post', [BookController::class, 'store'])->name('postBook');
     //ban a user
-    Route::get('Ban/{id}',[AdminController::class,'BanUser'])->name('userBan');
+    Route::get('Ban/{id}', [AdminController::class, 'BanUser'])->name('userBan');
 });
 
 
@@ -124,9 +128,9 @@ Route::middleware('auth')->name('Tutor.')->group(function () {
     //get tutor's chat with a parent
     Route::get('chating/{id}/{pid?}', [TutorController::class, 'chating'])->name('chating');
     //delete a message
-    Route::get('demessage/{id}',[ChatController::class,'del_message'])->name('deleteMessage');
+    Route::get('demessage/{id}', [ChatController::class, 'del_message'])->name('deleteMessage');
     //Edit a message
-    Route::post('edmessage/{id}',[ChatController::class,'edi_message'])->name('editMessage');
+    Route::post('edmessage/{id}', [ChatController::class, 'edi_message'])->name('editMessage');
     //get all children that the tutor teaches
     Route::get('get_students', [TutorController::class, 'get_students'])->name('get_students');
     //check a specific child's progress
@@ -142,21 +146,21 @@ Route::middleware('auth')->group(function () {
     Route::get('lesson_page/{subject}/{child}', [StudentDashboardController::class, 'subject_page'])->name('subject_page');
     Route::post('incrementProgress/{child_id}/{role}', [StudentDashboardController::class, 'increase_progress'])->name('incrementProgress');
     Route::get('student_logout', [ChildrenController::class, 'index'])->name('student_logout');
-    Route::get('child/{id}', [StudentDashboardController::class,'child_interface'])->name('child_interface');
+    Route::get('child/{id}', [StudentDashboardController::class, 'child_interface'])->name('child_interface');
     //Send message
-    Route::post('sendmessage/{id}',[ChatController::class,'sendMessage'])->name('sendMessage');
+    Route::post('sendmessage/{id}', [ChatController::class, 'sendMessage'])->name('sendMessage');
     //Get chat
-    Route::get('getchat/{id}',[ChatController::class,'getChat'])->name('getMessages');
+    Route::get('getchat/{id}', [ChatController::class, 'getChat'])->name('getMessages');
     //Report message
-    Route::get('reportmes/{id}',[ChatController::class,'reportMessage'])->name('reportMessage');
+    Route::get('reportmes/{id}', [ChatController::class, 'reportMessage'])->name('reportMessage');
     //Clear chat
-    Route::get('clearch/{id}',[ChatController::class,'ClearChat'])->name('deleteAllMessages');
+    Route::get('clearch/{id}', [ChatController::class, 'ClearChat'])->name('deleteAllMessages');
     //Unreport a message
-    Route::get('unreport/{id}',[ChatController::class,'unreport'])->name('UnreportMessage');
+    Route::get('unreport/{id}', [ChatController::class, 'unreport'])->name('UnreportMessage');
 });
 
 Route::get('under_construction', function () {
-    return view('underconstruction');
+    return view('gallery');
 })->name('under_construction');
 
 require __DIR__ . '/auth.php';

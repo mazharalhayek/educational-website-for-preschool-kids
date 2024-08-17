@@ -8,6 +8,7 @@ use App\Models\BookCart;
 use App\Models\ParentBook;
 use App\Http\Requests\BookRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
@@ -51,7 +52,7 @@ class BookController extends Controller
 
     /**
      * Send the cart after adding books to it(buy the books)
-     * @param Book 
+     * @param Book
      * @return mixed|\Illuminate\Http\RedirectResponse
      */
     public function confirmPurchase()
@@ -115,6 +116,7 @@ class BookController extends Controller
 
         return redirect()->back();
     }
+
     /**
      * Display the authenticated user's cart
      * @param none
@@ -128,19 +130,43 @@ class BookController extends Controller
     /**
      * Remove all books from the authenticated user's cart
      * @param none
-     *@return mixed|\Illuminate\Http\RedirectResponse
+     * @return mixed|\Illuminate\Http\RedirectResponse
      */
-    public function clearCart() {
+    public function clearCart()
+    {
         $empty = collect(Auth::user()->user_cart->booksInCart)->isEmpty();
         if ($empty) {
             return redirect()->back()->withErrors('Cart is already empty')->withInput();
         }
-        foreach (Auth::user()->user_cart->booksInCart as $book) {           
+        foreach (Auth::user()->user_cart->booksInCart as $book) {
             Auth::user()->user_cart->booksInCart->where('book_id', $book->book_id)->first()->delete();
         }
         Auth::user()->user_cart->total = 0.0;
         Auth::user()->user_cart->save();
         session()->flash('success', 'Cart cleared successfuly ');
         return redirect()->back();
+    }
+
+    /**
+     * Give a specific purchased book a review
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function Review(Request $request, $id)
+    {
+        $request->validate([
+            'review' => 'min:0|max:5|integer',
+        ]);
+        $book = ParentBook::where('book_id', $id)->where('parent_id', Auth::id())->first();
+
+        if ($book->review == null) {
+            $book->review = $request->review;
+            $book->save();
+            session()->flash('success', 'Review sent successfully');
+            return redirect()->back();
+        }
+        return redirect()->back()->withErrors('Book has been received a review before');
+
     }
 }
