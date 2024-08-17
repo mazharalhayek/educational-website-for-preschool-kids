@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Media;
 use App\Models\User;
 use App\Models\Tutor;
 use App\Models\Message;
@@ -77,7 +78,7 @@ class AdminController extends Controller
     }
 
     /**
-     * Restict a user from using the website
+     * Restrict a user from using the website
      * @param mixed $id
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -86,4 +87,26 @@ class AdminController extends Controller
         $user = User::where('id', $id)->first()->delete();
         return redirect()->back();
     }
+
+    /**
+     * Get all pending media requests
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function manageMedia()
+    {
+        $medias = Media::where('state', 'pending')
+            ->with('mediaSender', 'mediaReceiver')
+            ->paginate(5);
+        return view('admin.media', compact('medias'));
+    }
+
+    public function mediaState($id, $state)
+    {
+        $media = Media::where('id', $id)->first();
+        $media->state = $state;
+        $media->save();
+        
+        return redirect()->back();
+    }
+
 }

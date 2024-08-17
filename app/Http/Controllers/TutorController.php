@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Image;
+use App\Models\Media;
 use App\Models\Tutor;
 use App\Models\Message;
 use App\Models\Parents;
 use App\Models\Progress;
 use App\Models\TutorChild;
+use App\Traits\Files;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,8 +22,8 @@ class TutorController extends Controller
      */
     public function get_students()
     {
-        $my_students = Tutor::where('id',Auth::id())->with('my_students')->first();
-        return view('tutors.my_students',compact('my_students'));
+        $my_students = Tutor::where('id', Auth::id())->with('my_students')->first();
+        return view('tutors.my_students', compact('my_students'));
     }
 
     /**
@@ -31,7 +33,7 @@ class TutorController extends Controller
      */
     public function update_pfp(Request $request)
     {
-        $tutor_image = Tutor::where('id',Auth::id())->first();
+        $tutor_image = Tutor::where('id', Auth::id())->first();
         $tutor_image->image = $request->image;
         $tutor_image->save();
         return redirect(route('Tutor.updateinterface'));
@@ -43,7 +45,7 @@ class TutorController extends Controller
      */
     public function remove_pfp()
     {
-        $tutor_image = Tutor::where('id',Auth::id())->first();
+        $tutor_image = Tutor::where('id', Auth::id())->first();
         $tutor_image->image = null;
         $tutor_image->save();
         return redirect(route('Tutor.updateinterface'));
@@ -55,15 +57,15 @@ class TutorController extends Controller
      * @param mixed $pid
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function chating($id,$pid=null)
+    public function chating($id, $pid = null)
     {
         $child = Auth::user()->user_type->my_students->where('id', $id)->first();
         if ($pid != null) {
-           $chat = Auth::user()->allMyMessages($pid);
-           $pu = Parents::where('id',$pid)->first();
-            return view('chat',compact('child','chat','pu'));
+            $chat = Auth::user()->allMyMessages($pid);
+            $pu = Parents::where('id', $pid)->first();
+            return view('chat', compact('child', 'chat', 'pu'));
         }
-        return view('chat',compact('child'));
+        return view('chat', compact('child'));
     }
 
     /**
@@ -73,8 +75,35 @@ class TutorController extends Controller
      */
     public function student_progress($id)
     {
-        $student = Progress::where('child_id',$id)->get();
-        return view('tutors.student_progress',compact('student'));
+        $student = Progress::where('child_id', $id)->get();
+        return view('tutors.student_progress', compact('student'));
     }
 
+    /**
+     * Send a media file to a specific student
+     * @param Request $request
+     * @param $id
+     * @return void
+     */
+    public function sendFile(Request $request, $id)
+    {
+        $request->validate([
+            'title' => 'profanity|string|min:5|max:100|required',
+        ]);
+
+        $path = Files::saveFileF($request->file);
+
+        Media::create([
+            'student_id' => $id,
+            'tutor_id' => Auth::id(),
+            'title' => $request->title,
+            'file' => $path,
+        ]);
+
+        session()->flash('success', 'File sent to student');
+
+        return redirect()->back();
+    }
+
+    
 }

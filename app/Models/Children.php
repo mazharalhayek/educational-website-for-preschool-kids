@@ -37,4 +37,8 @@ class Children extends Model
         return $this->hasMany(Progress::class, 'child_id', 'id');
     }
 
+    public function receivedMedia()
+    {
+        return $this->hasMany(Media::class, 'student_id', 'id');
+    }
 }

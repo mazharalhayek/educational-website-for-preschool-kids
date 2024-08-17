@@ -107,6 +107,10 @@ Route::middleware('auth')->name('Admin.')->group(function () {
     Route::post('add-book-post', [BookController::class, 'store'])->name('postBook');
     //ban a user
     Route::get('Ban/{id}', [AdminController::class, 'BanUser'])->name('userBan');
+    //manage sent media requests
+    Route::get('mediaManage', [AdminController::class, 'manageMedia'])->name('media');
+    //Acept or reject sent media
+    Route::get('AorR/{id}/{state}', [AdminController::class, 'mediaState'])->name('AccOrRej');
 });
 
 
@@ -135,6 +139,8 @@ Route::middleware('auth')->name('Tutor.')->group(function () {
     Route::get('get_students', [TutorController::class, 'get_students'])->name('get_students');
     //check a specific child's progress
     Route::get('student_progress/{id}', [TutorController::class, 'student_progress'])->name('student_progress');
+    //Send a media file to a student
+    Route::post('mediaFile/{id}', [TutorController::class, 'sendFile'])->name('sendMedia');
 });
 
 //Student Dashboard Controllers

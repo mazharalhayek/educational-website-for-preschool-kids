@@ -192,6 +192,10 @@
                         <a href="{{route('Admin.addBook')}}" class="side-menu__item" style="text-decoration:none">📚
                             &nbsp;<span class="side-menu__label">Books</span></a>
                     </li>
+                    <li class="slide">
+                        <a href="{{route('Admin.media')}}" class="side-menu__item" style="text-decoration:none">📂
+                            &nbsp;<span class="side-menu__label">Media requests</span></a>
+                    </li>
                     <li class="side-item side-item-category">Services management</li>
                     <li class="slide">
                         <a href="{{route('Admin.displayFeedback',['type'=>'feedback'])}}" class="side-menu__item"

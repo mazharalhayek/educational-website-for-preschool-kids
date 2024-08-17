@@ -28,13 +28,27 @@ class Tutor extends Model
             'image'
         ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function my_students()
     {
         return $this->belongsToMany(Children::class, 'tutor_children', 'tutor_id', 'child_id')->with('my_parent');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function reviews()
     {
         return $this->hasMany(TutorChild::class, 'tutor_id', 'id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function sentMedia()
+    {
+        return $this->hasMany(Media::class, 'tutor_id', 'id');
     }
 }
