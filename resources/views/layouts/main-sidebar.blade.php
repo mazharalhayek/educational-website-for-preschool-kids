@@ -123,6 +123,10 @@
                             &nbsp;<span class="side-menu__label">My Students</span></a>
                     </li>
                     <li class="slide">
+                        <a href="{{route('Tutor.getSched')}}" class="side-menu__item"
+                           style="text-decoration:none">📆 &nbsp;<span class="side-menu__label">My Schedule</span></a>
+                    </li>
+                    <li class="slide">
                         <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . $page='#') }}"
                            style="text-decoration:none">📄 &nbsp;<span class="side-menu__label">Worksheets</span><i
                                 class="angle fe fe-chevron-down"></i></a>

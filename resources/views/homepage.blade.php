@@ -168,6 +168,9 @@
                                     <div class="carousel-slide">
                                         <img src="{{ asset('images/Numbers.jpg') }}" alt="Image 2">
                                     </div>
+                                    <div class="carousel-slide">
+                                        <img src="{{ asset('images/kids4.png') }}" alt="Image 2">
+                                    </div>
                                 </div>
                             </b>
                         </div>

@@ -141,6 +141,8 @@ Route::middleware('auth')->name('Tutor.')->group(function () {
     Route::get('student_progress/{id}', [TutorController::class, 'student_progress'])->name('student_progress');
     //Send a media file to a student
     Route::post('mediaFile/{id}', [TutorController::class, 'sendFile'])->name('sendMedia');
+    //Get schedule
+    Route::get('MySchedule', [TutorController::class, 'Schedule'])->name('getSched');
 });
 
 //Student Dashboard Controllers
@@ -163,10 +165,13 @@ Route::middleware('auth')->group(function () {
     Route::get('clearch/{id}', [ChatController::class, 'ClearChat'])->name('deleteAllMessages');
     //Unreport a message
     Route::get('unreport/{id}', [ChatController::class, 'unreport'])->name('UnreportMessage');
+    //Get sent media by tutor
+    Route::get('myMedia/{id}', [StudentDashboardController::class, 'getRecivedMedia'])->name('MyMedia');
+
 });
 
 Route::get('under_construction', function () {
-    return view('gallery');
+    return view('calendar');
 })->name('under_construction');
 
 require __DIR__ . '/auth.php';

@@ -172,7 +172,7 @@
                                                                onclick="openFile()" value="Open the file">
                                                         <script>
                                                             function openFile() {
-                                                                var filePath = '{{$media->file}}';
+                                                                let filePath = '{{$media->file}}';
                                                                 window.open(filePath, '_blank');
                                                             }
                                                         </script>

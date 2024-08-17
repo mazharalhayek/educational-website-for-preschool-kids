@@ -105,5 +105,8 @@ class TutorController extends Controller
         return redirect()->back();
     }
 
-    
+    public function Schedule()
+    {
+        return view('calendar');
+    }
 }

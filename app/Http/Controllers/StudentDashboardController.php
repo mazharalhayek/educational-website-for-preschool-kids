@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Children;
+use App\Models\Media;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Traits\Response;
@@ -10,10 +11,9 @@ use App\Models\Progress;
 use App\Models\Parents;
 
 
-
 class StudentDashboardController extends Controller
 {
-    public function child_interface($id) 
+    public function child_interface($id)
     {
         try {
             $child = Children::find($id);
@@ -22,55 +22,54 @@ class StudentDashboardController extends Controller
             return redirect()->back()->with('alert', $e);
         }
     }
+
     public function getProfile($id)
     {
         $child = Children::find($id);
 
-        if (!$child)
-        {
+        if (!$child) {
             abort(404);
         }
         return view('Children.child-profile', compact('child'));
     }
 
-    public function subject_page($subject,$child)
+    public function subject_page($subject, $child)
     {
-        $child = Children::where('id',$child)->first();
-        return view('Children.lesson_videos',compact('subject'),compact('child'));
+        $child = Children::where('id', $child)->first();
+        return view('Children.lesson_videos', compact('subject'), compact('child'));
     }
 
     public function getBooks($id)
     {
         $child = Children::find($id);
-        $parent_books = Parents::where('id',Auth::id())->with('books')->first();
+        $parent_books = Parents::where('id', Auth::id())->with('books')->first();
         $purchased_books = $parent_books->books;
-        return view('Children.books-main',compact('child'),compact('purchased_books'));
+        return view('Children.books-main', compact('child'), compact('purchased_books'));
     }
 
     public function viewReport($id)
     {
-        $child = Children::where('id',$id)->with('my_progress')->first();
+        $child = Children::where('id', $id)->with('my_progress')->first();
         return view('Children.progress-report', compact('child'));
     }
 
-    public function increase_progress($child_id,$role)
+    public function increase_progress($child_id, $role)
     {
-        $child_progress = Progress::where('child_id',$child_id)
-                                    ->where('role',$role)->first();
+        $child_progress = Progress::where('child_id', $child_id)
+            ->where('role', $role)->first();
 
-        if($child_progress)
-        {
+        if ($child_progress) {
             $child_progress->grade = $child_progress->grade + 10;
             $child_progress->save();
             return redirect()->back();
         }
 
         $child_progress = Progress::create([
-            'child_id'=>$child_id,
-            'grade'=> 10,
-            'role'=>$role,
+            'child_id' => $child_id,
+            'grade' => 10,
+            'role' => $role,
         ]);
-        session()->flash('success','Your progress increased by 10 😃');
+        session()->flash('success', 'Your progress increased by 10 😃');
 
         return redirect()->back();
     }
@@ -79,4 +78,13 @@ class StudentDashboardController extends Controller
     {
         return redirect()->back();
     }
-};
+
+    public function getRecivedMedia($id)
+    {
+        $medias = Media::where('student_id', $id)->get();
+        $child = Children::where('id', $id)->first();
+        return view('Children.media', compact('medias', 'child'));
+    }
+}
+
+;
